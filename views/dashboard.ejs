@@ -1,0 +1,380 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <input type="hidden" id="page_user_id" value="<%- user._id -%>" />
+          <input type="hidden" id="page_user_bernum" value="<%- user.sip_account -%>" />
+          <input type="hidden" id="page_user_ssap" value="<%- user.sip_password -%>" />
+          <input type="hidden" id="page_location_id" value="" />
+          <input type="hidden" id="location_number" value="" />
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="h6" for="select_location">พื้นที่ประกาศ: </label>
+              หมายเลข: <i class="badge badge-info" id="current_number"></i>
+            </div>
+            <div class="col-sm-10">
+              <select class="form-control custom-select" id="select_location">
+                <option value="default">เลือกพื้นที่</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4 mb-4">
+          <div class="led-box">
+            <div id="led_on_air" class="led-off"></div>
+            <p class="h6">On Air</p>
+          </div>
+          <div class="led-box">
+            <div id="led_recording" class="led-off"></div>
+            <p class="h6">Recording</p>
+          </div>
+          <div class="led-box">
+            <div id="led_playing" class="led-off"></div>
+            <p class="h6">Playing</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group float-right">
+            <button class="btn btn-info" id="btn_main_on">เปิดระบบ</button>
+            <button class="btn btn-success" id="btn_main_call">เริ่มประกาศ</button>
+            <button class="btn btn-danger" id="btn_main_disconnect">หยุดประกาศ</button>
+            <button class="btn btn-warning" id="btn_main_off">ปิดระบบ</button>
+            <button class="btn btn-info" id="mic_control">
+              <i class="fa fa-microphone" id="mic_icon"></i>
+            </button>
+          </div>
+          <div class="form-group float-left">
+            <button class="btn btn-warning" id="btn_main_play_music">เล่น/หยุดเพลง</button>
+            <button class="btn btn-success" id="btn_volume_down">ลดเสียง</button>
+            <label class="text text-default h6" id="volume_level">0</label>
+            <button class="btn btn-warning" id="btn_volume_up">เพิ่มเสียง</button>
+
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <div class="col-sm-12">
+              <audio id="music_audio" controls loop type="audio/wav">Music control</audio>
+              <audio id="main_audio" preload="auto" type="audio/wav">Audio control</audio>
+
+            </div>
+            <div class="col-sm-12 mt-2">
+              <select class="form-control select" id="music_select">
+                <option value="-1">เลือกไฟล์เพลง</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="row mb-2 p-2 bg-dark rounded">
+            <div class="col-sm-8">
+              <span>ไฟล์ : </span>
+              <span id="player_file_name">-</span>
+            </div>
+            <div class="col-sm-4">
+              <audio controls id="audio_player"></audio>
+              <input type="checkbox" class="checkbox" id="loop_check">วนซ้ำ</input>
+            </div>
+            <div class="col-sm-12">
+              <span for="bn_load_player_file">โหลดไฟล์ :</span>
+              <input type="file" class="btn btn-sm btn-success float-right" id="btn_load_player_file"></input>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 p-0">
+          <div class="card bg-dark">
+            <div class="card-title p-2">
+              <label class="h6 text-warning">บันทึกข้อความ</label>
+              <button class="btn btn-info mt-2 btn-save-message float-right" id="btn_save_message">เซฟ</button>
+            </div>
+            <div class="card-body"><textarea class="form-control" rows="7" style="width:100%;" id="user_note"></textarea></div>
+          </div>
+        </div>
+        <div class="col-sm-12 p-2">
+          <div class="row bg-dark p-2 rounded">
+            <div class="col-sm-2">
+              <span class="h6 rounded">บันทึกเสียง</span>
+              <p>
+                <audio controls id="audio_record"></audio>
+              </p>
+              <span class="h6 rounded">ฟังบันทึก</span>
+              <p>
+                <audio controls id="aux_audio"></audio>
+              </p>
+            </div>
+            <div class="col-sm-8">
+              <div class="row p-3">
+                <div class="col-sm-12 col-record" id="col_0">
+                  <label class="h8 rounded">1:<div id="recorded_file_0"></div></label>
+
+                </div>
+                <div class="col-sm-12 col-record" id="col_1">
+                  <label class="h8 rounded">2:<div id="recorded_file_1"></div></label>
+
+                </div>
+                <div class="col-sm-12 col-record" id="col_2">
+                  <label class="h8 rounded">3:<div id="recorded_file_2"></div></label>
+                </div>
+                <div class="col-sm-12 col-record" id="col_3">
+                  <label class="h8 rounded">4:<div id="recorded_file_3"></div></label>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <button class="btn btn-danger mb-2" id="btn_record_stop" disabled>หยุดบันทึก</button>
+                <button class="btn btn-success" id="btn_record">บันทึกเสียง</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <p class="h6 rounded">
+            สถานะการทำงานของอุปกรณ์ประกาศเสียง</p>
+        </div>
+        <div class="col-sm-12">
+          <div id="extension_dot_list"></div>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('scripts.ejs'); %>
+<script src="/public/js/jssip-3.9.1.js"></script>
+<script src="/public/js/recorder.js"></script>
+<script src="/public/js/sipclient.js"></script>
+<script type="text/javascript">
+  var music = $('#music_audio')[0];
+  var localAudio = $('#main_audio')[0];
+  var auxAudio = $('#aux_audio')[0];
+  var local_stream;
+  var volume = [0.0, 0.2, 0.5, 0.8, 1.0];
+  var volume_level = 3;
+
+  function encodeHTML(s) {
+    return s.replace(/\"/g, '&amp;').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
+  }
+
+  function refresh_status() {
+    let location_id = $('#page_location_id').val();
+    //console.log('Refresh for location = ' + location_id);
+    if (!location_id) return 0;
+    let _post_data = {
+      _id: location_id
+    };
+    $.post('/device_list', _post_data, function(res) {
+      let html = '';
+      //console.log(res);
+      $('#extension_dot_list').html(html);
+      if (res.data.length > 0) {
+        var offline_device = 0;
+        var online_device = 0;
+        var using_device = 0;
+        html += '<div class="row  p-1 mb-2">';
+        res.data.forEach(function(element, ind) {
+          //console.log(element.volume);
+          let _number = 0;
+          let _name = '';
+          let _color = 'default';
+          let _vol = element.volume ? element.volume : '10';
+          let _vol_element = '<option value="' + _vol + '">' + _vol + '</option>'
+          if (element.device_state.length > 0) {
+            switch (element.device_state[0].state) {
+              case "0":
+                _color = 'red_dot';
+                offline_device++;
+                break;
+              case "1":
+                _color = 'green_dot';
+                online_device++;
+                break;
+              case "2":
+                _color = 'yellow_dot';
+                using_device++;
+                break;
+              default:
+                _color = 'dot';
+                break;
+            }
+          } else {
+            _color = 'dot';
+          }
+
+          html += '<div class="col-md-2 bg-dark m-2 rounded"><div class="row"><div class="col-md-2 p-2 mr-2"><span title="หมายเลข ' +
+            element.number + '" class="' +
+            _color + '"></span></div><div class="col-md-8 p-2">' + element.number + '</div><div class="col-md-4 p-2">' +
+            '<select class="select-set-volume" device_id="' +
+            element._id + '">' +
+            _vol_element + '<option value="10">10</option><option value="8">8</option><option value="6">6</option><option value="4">4</option>' +
+            '<option value="2">2</option><option value="0">0</option><option value="-4">-4</option><option value="-10">-10</option></select></div><div class="col-md-8 p-2"><span>' +
+            element.name + '</span></div></div></div>';
+        })
+        html += '</div>';
+        $('#extension_dot_list').html(html);
+      }
+    })
+  }
+  $(function() {
+    $.post("/location_list_id", {
+      from: 'dashboard'
+    }, function(res) {
+      //console.log(res);
+      $.each(res, function(i, item) {
+        $('#select_location').append($('<option>', {
+          value: item._id,
+          text: item.name,
+        }));
+      });
+    }).then(function() {
+      //console.log(sessionStorage.location_id + ',' + sessionStorage.location_name)
+      if (sessionStorage.location_id != undefined) {
+        $('#select_location').val(sessionStorage.location_id).trigger('change');
+      }
+    })
+
+
+    // load file list
+    $.post("/file_list", function(res) {
+      //console.log(res);
+      $.each(res, function(i, item) {
+        $('#music_select').append($('<option>', {
+          value: item.name,
+          text: item.originalname,
+          mimetype: item.img.contentType
+        }));
+      });
+    });
+
+    refresh_status()
+    music.volume = 0.8;
+    $('#volume_level').text('ระดับเสียง: ' + music.volume * 10);
+  })
+  $(document).on('change', '.select-set-volume', function(evt) {
+    var thisSelect = $(this);
+    //console.log(thisButton.attr('device_id'));
+    var _post_data = {
+      _id: thisSelect.attr('device_id'),
+      _volume: thisSelect.val()
+    }
+    //console.log(_post_data);
+    // Set volume data
+    $.post("/device_volume", _post_data, function(res) {
+      //console.log(res);
+    })
+  })
+  $("#music_select").on('change', function(evt) {
+    //console.log('val = ' + $(this).val());
+    if ($(this).val() != '-1') {
+      var mtype = $('option:selected', this).attr('mimetype');
+      music.src = '/uploads/' + $(this).val();
+      music.preload = 'auto';
+      music.setAttribute('type', mtype);
+    } else {
+      music.src = '';
+      music.setAttribute('type', 'audio/wav');
+    }
+
+  });
+  // show user note
+  function show_user_note() {
+    let _post_data = {
+      _user_id: "<%- user._id -%>"
+    }
+    $.post("/get_user_note", _post_data, function(res) {
+      //console.log(res.data);
+      $('#user_note').val(res.data.note);
+      $('#user_note').focus().prop({
+        'selectionStart': res.data.selection_start,
+        'selectionEnd': res.data.selection_end
+      })
+    });
+  }
+  show_user_note();
+
+  $("#btn_save_message").on('click', function(evt) {
+    var _post_data = {
+      _user_id: "<%- user._id -%>",
+      _user_note: $('#user_note').val(),
+      _user_select_start: $('#user_note').prop('selectionStart'),
+      _user_select_end: $('#user_note').prop('selectionEnd')
+    }
+    //console.log(_post_data);
+    // Set volume data
+    $.post("/set_user_note", _post_data, function(res) {
+      //console.log(res);
+      alert('บันทึกข้อความแล้ว')
+    });
+    show_user_note();
+  })
+  $("#btn_main_play_music").on('click', function(evt) {
+    if (music.paused) {
+      music.play();
+    } else {
+      music.pause();
+    }
+  })
+  $("#btn_volume_up").on('click', function(evt) {
+    volume_level++;
+    music.volume = volume[volume_level];
+    if (volume_level >= 4) volume_level = 4;
+    $('#volume_level').text('ระดับเสียง: ' + music.volume * 10);
+  })
+  $("#btn_volume_down").on('click', function(evt) {
+    volume_level--;
+    music.volume = volume[volume_level];
+    if (volume_level <= 0) volume_level = 0;
+    $('#volume_level').text('ระดับเสียง: ' + music.volume * 10);
+  })
+  music.addEventListener('play', function(evt) {
+    //console.log('play music');
+    var on_playing = document.getElementById('led_playing');
+    on_playing.setAttribute('class', 'led-red');
+  })
+  music.addEventListener('pause', function(evt) {
+    //console.log('play pause');
+    var on_playing = document.getElementById('led_playing');
+    on_playing.setAttribute('class', 'led-off');
+  })
+
+  $('#select_location').on('change', function(evt) {
+    //console.log($(this).val());
+    $.post('/location_id', {
+      _id: $(this).val()
+    }, function(_res) {
+      //console.log(_res);
+      let location = _res.data;
+      $('#location_number').val(location.number);
+      $('#page_location_id').val(location._id);
+      $('#current_location_name').text(location.name);
+      $('#current_number').text(location.number);
+      $('#btn_main_off').trigger('click');
+
+      sessionStorage.location_id = location._id;
+      sessionStorage.location_name = location.name;
+
+      refresh_status()
+    })
+  })
+  setInterval(function() {
+    refresh_status()
+  }, 15000);
+  $(document).on('beforeunload', function() {
+    alert('Bye.');
+  });
+</script>
+
+<%- include('footer.ejs'); %>

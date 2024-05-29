@@ -1,0 +1,51 @@
+<div class="modal fade" id="modal_edit_pa_schedule_plan">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขแผน</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/edit_pa_schedule_plan" id="form_edit_pa_schedule_plan">
+          <div class="row">
+            <div class="col-md-12">
+              ชื่อ
+              <select type="text" class="form-control select_pa_plan" id="e_select_pa_plan" name="select_schedule" disabled>
+              </select>
+              <input type="hidden" id="e_pa_plan_type" value="default" />
+              <input type="hidden" id="e_pa_plan_id" value="0" />
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="pa_plan_hour">ความยาว(วินาที)</label>
+                <input type="text" class="form-control" id="e_pa_plan_duration" name="pa_plan_duration" value="0" placeholder="0" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="pa_plan_hour">เวลา</label>
+                <input type="hidden" id="pa_plan_play_time" value="" />
+                <input type="text" class="form-control" id="e_pa_plan_hour" name="pa_plan_hour" value="12:00" placeholder="12:00" />
+                <input type="hidden" id="e_pa_plan_day" value="0" />
+                <input type="hidden" id="e_pa_plan_date" value="0" />
+                <input type="hidden" id="e_pa_plan_month" value="0" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              เลือกไฟล์
+              <select class="form-control select select_file" id="e_select_file" name="select_file" disabled>
+                <option value="-">-</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <button type="button" for="form_edit_pa_schedule_plan" class="btn btn-primary btn-edit-pa-plan-data" id="btn_edit_pa_plan_data">เซฟ</button>
+      </div>
+    </div>
+  </div>
+</div>

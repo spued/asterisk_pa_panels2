@@ -1,0 +1,125 @@
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="/" class="brand-link m-2 text-center">
+    <img src="/public/img/mylogo.png" id="img_logo" class="img-circle elevation-3 mb-2" style="opacity: .8; width: 120px; height: 120px;">
+    <div class="brand-text font-weight-light">
+      <h6>EasyPA Web</h6>
+    </div>
+  </a>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="/public/img/avatar5.png" class="img-circle elevation-2" alt="User Image">
+      </div>
+      <div class="info">
+        <a href="#" class="d-block"><%= user.name %></a>
+      </div>
+    </div>
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <% if(user.type == "admin" || user.type == "sub_admin" ){ %>
+        <li class="nav-item">
+          <a href="/monitor" class="nav-link">
+            <i class="nav-icon fas fa-desktop"></i>
+            <p>
+              มอนิเตอร์
+            </p>
+          </a>
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a href="/device_check" class="nav-link">
+            <i class="nav-icon fas fa-desktop"></i>
+            <p>
+              ตรวจสอบ
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/dashboard" class="nav-link">
+            <i class="nav-icon fas fa-microphone"></i>
+            <p>
+              แป้นประกาศ
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/pa_radio" class="nav-link">
+            <i class="nav-icon fas fa-podcast"></i>
+            <p>
+              PA Radio Live
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/pa_auto_radio" class="nav-link">
+            <i class="nav-icon fas fa-podcast"></i>
+            <p>
+              PA Auto Radio
+            </p>
+          </a>
+        </li>
+        <% if(user.type == "admin" || user.type == "sub_admin" ){ %>
+        <li class="nav-item">
+          <a href="/pa_plan" class="nav-link">
+            <i class="nav-icon fas fa-th"></i>
+            <p>
+              แผนประกาศ
+            </p>
+          </a>
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a href="/auto_pa" class="nav-link">
+            <i class="nav-icon fas fa-clock"></i>
+            <p>
+              ตั้งเวลาประกาศ
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/file_manage" class="nav-link">
+            <i class="nav-icon fas fa-music"></i>
+            <p>
+              ไฟล์เสียง
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="/profile_manager" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              เปลี่ยนพาสเวิร์ด
+            </p>
+          </a>
+        </li>
+        <% if(user.type == "admin" || user.type == "sub_admin" ){ %>
+        <li class="nav-item">
+          <a href="/device_manager" class="nav-link">
+            <i class="nav-icon fas fa-volume-up"></i>
+            <p>
+              จัดการอุปกรณ์
+            </p>
+          </a>
+        </li>
+        <% } %>
+        <% if(user.type == "admin"){ %>
+        <li class="nav-item">
+          <a href="/user_manager" class="nav-link">
+            <i class="nav-icon fas fa-user"></i>
+            <p>
+              จัดการผู้ใช้งาน
+            </p>
+          </a>
+        </li>
+        <% } %>
+        <li class="nav-item">
+          <a href="/logout"> <button type="submit" class="btn btn-warning btn-sm login-button">Logout</button> </a>
+        </li>
+      </ul>
+    </nav><!-- /.sidebar-menu -->
+  </div><!-- /.sidebar -->
+</aside>

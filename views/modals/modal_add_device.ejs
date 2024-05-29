@@ -1,0 +1,38 @@
+<div class="modal fade" id="modal_add_device">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มอุปกรณ์</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form_add_device">
+          <div class="form-group">
+            <label for="number">หมายเลข</label>
+            <input type="text" class="form-control" id="number" placeholder="ใส่หมายเลข">
+          </div>
+          <div class="form-group">
+            <label for="sn">หมายเลขซีเรียล</label>
+            <input type="text" class="form-control" id="sn" placeholder="ใส่หมายเลขเครื่อง" value="-">
+          </div>
+          <div class="form-group">
+            <label for="name">ชื่อ</label>
+            <input type="text" class="form-control" id="name" placeholder="ชื่อหรือคำอธิบาย" value="-">
+          </div>
+          <label for="select_type">ชนิด</label>
+          <select class="form-control custom-select" id="select_type">
+            <option value="output">ลำโพง</option>
+            <option value="input">ไมโครโฟน</option>
+            <option value="others">อื่นๆ</option>
+          </select>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <button type="button" for="form_add_device" class="btn btn-primary btn-add-device-data">เพิ่มอุปกรณ์</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,320 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <h3> ตั้งเวลาการประกาศรายวัน </h3>
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-title align-center">
+              <label> เพลงชาติไทย เปิดเวลา 8.00 และ 18.00 ของทุกวัน </label>
+            </div>
+            <div class="card-body">
+              พื้นที่
+              <div class="form-check">
+                <div id="location_list_nation"></div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-sm-2">
+                  <select class="form-control" id="select_nation_enable" name="select_nation_enable">
+                    <option value=0> ปิด</option>
+                    <option value=1> เปิด</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-info" id="test_call">ทดสอบ</button>
+                </div>
+                <div class="col-sm-8">
+                  <button class="btn btn-success float-right" id="save_nation">เซฟ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-title align-center">
+              <label> เพลงท้องถิ่นเปิดตามเวลาที่กำหนดของทุกวัน </label>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-12">
+                  พื้นที่
+                  <div class="form-check">
+                    <div id="location_list_local"></div>
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  เลือกไฟล์
+                  <select class="form-control select" id="select_file" name="select_file">
+                    <option value="-">-</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  เริ่มเวลา
+                  <select class="form-control select" id="select_hour" name="select_hour">
+                    <option value="00">00</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09" selected>09</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  นาที
+                  <select class="form-control select" id="select_minute" name="select_minute">
+                    <option value="00">00</option>
+                    <option value="30">30</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  ความยาว
+                  <select class="form-control select" id="select_duration" name="select_duration">
+                    <option value="60"> 1 นาที</option>
+                    <option value="90"> 3 นาที</option>
+                    <option value="900"> 15 นาที</option>
+                    <option value="1800"> 30 นาที</option>
+                    <option value="3600"> 1 ชั่วโมง</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="row">
+                <div class="col-sm-2">
+                  <select class="form-control" id="select_local_enable" name="select_local_enable">
+                    <option value=0> ปิด</option>
+                    <option value=1> เปิด</option>
+                  </select>
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-info" id="test_call">ทดสอบ</button>
+                </div>
+                <div class="col-sm-8">
+                  <button class="btn btn-success float-right" id="save_local">เซฟ</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  $(function() {
+    //Load the schedule for user
+    $.post('/load_schedule', {
+      user_id: "<%= user._id %>"
+    }, function(res) {
+      console.log(res);
+      var nation_data = res.data.find(({
+        type
+      }) => type === 'nation_schedule');
+      // get and set nation song
+      console.log(nation_data)
+      $('#select_nation_enable').val(nation_data.status).trigger('change');
+    })
+
+    $("#save_nation").on('click', function(evt) {
+      //console.log(evt);
+      let location_list = document.getElementById('location_list_nation');
+      let childs = location_list.childNodes;
+      let loc_list = [];
+      let num_list = [];
+      childs.forEach(function(data, ind) {
+        //console.log(data.firstChild.id);
+        if (data.firstChild.checked) {
+          loc_list.push(data.firstChild.id);
+          num_list.push(data.firstChild.getAttribute('number'));
+        }
+      })
+      let _post_data = {
+        record_id: "",
+        location_id: "0",
+        owner: "<%= user._id %>",
+        sip_username: "<%= user.sip_account %>",
+        sip_password: "<%= user.sip_password %>",
+        name: 'nation_song',
+        type: 'nation_schedule',
+        priority: 0,
+        filename: $('#select_file').val(),
+        play_time: '08:00',
+        play_duration: '120',
+        nation_enable: $('#select_nation_enable').val(),
+        local_enable: $('#select_local_enable').val(),
+        location_list: loc_list.join(','),
+        number_list: num_list.join(',')
+      };
+      $.post('/save_schedule', _post_data, function(res) {
+        alert('เซฟข้อมูลแล้ว', res.message);
+      })
+    })
+    $("#save_local").on('click', function(evt) {
+      //console.log(evt);
+      let location_list = document.getElementById('location_list_nation');
+      let childs = location_list.childNodes;
+      let loc_list = [];
+      let num_list = [];
+      childs.forEach(function(data, ind) {
+        //console.log(data.firstChild.id);
+        if (data.firstChild.checked) {
+          loc_list.push(data.firstChild.id);
+          num_list.push(data.firstChild.getAttribute('number'));
+        }
+      })
+      let _post_data = {
+        record_id: "",
+        location_id: "0",
+        owner: "<%= user._id %>",
+        sip_username: "<%= user.sip_account %>",
+        sip_password: "<%= user.sip_password %>",
+        name: 'nation_song',
+        type: 'nation_schedule',
+        priority: 0,
+        filename: $('#select_file').val(),
+        play_time: $('#select_hour').val() + ':' + $('#select_minute').val(),
+        play_duration: $('#select_duration').val(),
+        nation_enable: $('#select_nation_enable').val(),
+        local_enable: $('#select_local_enable').val(),
+        location_list: loc_list.join(','),
+        number_list: num_list.join(',')
+      };
+      $.post('/save_schedule', _post_data, function(res) {
+        alert('เซฟข้อมูลแล้ว', res.message);
+      })
+    })
+
+    $.post("/location_list", function(res) {
+      //console.log(res);
+      var location_list_nation = document.getElementById('location_list_nation');
+      var location_list_local = document.getElementById('location_list_local');
+      $.each(res, function(i, item) {
+        var checkbox = document.createElement('input');
+
+        //console.log(item)
+        checkbox.type = 'checkbox';
+        checkbox.name = item.name;
+        checkbox.className = 'form-check-input nation_song';
+        checkbox.value = item.name;
+        checkbox.id = item._id;
+        checkbox.setAttribute('number', item.number);
+
+        var label = document.createElement('label');
+        label.htmlFor = item._id;
+        label.className = 'label';
+        label.appendChild(document.createTextNode(item.name));
+
+        var div = document.createElement('div');
+        div.id = 'div_national' + i
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        location_list_nation.appendChild(div);
+      });
+
+      $.each(res, function(i, item) {
+        var checkbox = document.createElement('input');
+
+        //console.log(item)
+        checkbox.type = 'checkbox';
+        checkbox.name = item.name;
+        checkbox.className = 'form-check-input local_song';
+        checkbox.value = item.name;
+        checkbox.id = item._id;
+        checkbox.setAttribute('number', item.number);
+
+        var label = document.createElement('label');
+        label.htmlFor = item._id;
+        label.className = 'label';
+        label.appendChild(document.createTextNode(item.name));
+
+        var div = document.createElement('div');
+        div.id = 'div_national' + i
+
+        div.appendChild(checkbox);
+        div.appendChild(label);
+        location_list_local.appendChild(div);
+      });
+    })
+    // load file list
+    $.post("/file_list", function(res) {
+      //console.log(res);
+      $.each(res, function(i, item) {
+        $('#select_file').append($('<option>', {
+          value: item.name,
+          text: item.originalname,
+          mimetype: item.img.contentType
+        }));
+      });
+    });
+
+    $("#test_call").on('click', function(evt) {
+      //console.log(evt);
+      let _post_data = {
+        id: 0,
+        name: 'test'
+      };
+
+      $.post('/local_play', _post_data, function(res) {
+        console.log(res);
+
+      })
+    })
+    $("#register").on('click', function(evt) {
+      //console.log(evt);
+      let _post_data = {
+        id: 0,
+        name: 'test'
+      };
+      $.post('/local_register', _post_data, function(res) {
+        console.log(res);
+
+      })
+    })
+    $("#unregister").on('click', function(evt) {
+      //console.log(evt);
+      let _post_data = {
+        id: 0,
+        name: 'test'
+      };
+      $.post('/local_unregister', _post_data, function(res) {
+        console.log(res);
+
+      })
+    })
+  })
+</script>
+
+<%- include('footer.ejs'); %>

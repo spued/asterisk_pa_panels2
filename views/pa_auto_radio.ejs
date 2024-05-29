@@ -1,0 +1,145 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <input type="hidden" id="page_user_id" value="<%- user._id -%>" />
+          <input type="hidden" id="page_user_bernum" value="<%- user.sip_account -%>" />
+          <input type="hidden" id="page_user_ssap" value="<%- user.sip_password -%>" />
+          <input type="hidden" id="page_location_id" value="" />
+          <input type="hidden" id="location_number" value="" />
+          <input type="hidden" id="owner_id" value="" />
+          <input type="hidden" id="owner" value="" />
+          <input type="hidden" id="page_current_playing" value="" />
+
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="h5" for="select_location">พื้นที่ประกาศ: </label>
+              หมายเลข: <i class="badge badge-info" id="current_number"></i>
+            </div>
+            <div class="col-sm-10">
+              <select class="form-control select" id="select_location">
+                <option value="default">เลือกพื้นที่</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <select class="form-control select" id="select_station">
+            <option value="-1">เลือกสถานีวิทยุ</option>
+          </select>
+        </div>
+        <div class="col-sm-12 mt-2">
+          <div class="in-line">
+            <div class="weekDays-selector">
+              <label>Weekly: </label>
+              <input type="checkbox" id="weekday-mon" class="weekday" value="mon" checked />
+              <label for="weekday-mon">Mon</label>
+              <input type="checkbox" id="weekday-tue" class="weekday" value="tue" checked />
+              <label for="weekday-tue">Tue</label>
+              <input type="checkbox" id="weekday-wed" class="weekday" value="wed" checked />
+              <label for="weekday-wed">Wed</label>
+              <input type="checkbox" id="weekday-thu" class="weekday" value="thu" checked />
+              <label for="weekday-thu">Thu</label>
+              <input type="checkbox" id="weekday-fri" class="weekday" value="fri" checked />
+              <label for="weekday-fri">Fri</label>
+              <input type="checkbox" id="weekday-sat" class="weekday" value="sat" checked />
+              <label for="weekday-sat">Sat</label>
+              <input type="checkbox" id="weekday-sun" class="weekday" value="sun" checked />
+              <label for="weekday-sun">Sun</label>
+            </div>
+            <label class="input-group-addon">Start: </label>
+            <select id="select_start_time" type="text" class="form-control select-time" name="start_time">
+              <option value="00">00</option>
+              <option value="01">01</option>
+              <option value="02">02</option>
+              <option value="03">03</option>
+              <option value="04">04</option>
+              <option value="05">05</option>
+              <option value="06">06</option>
+              <option value="07">07</option>
+              <option value="08">08</option>
+              <option value="09">09</option>
+              <option value="10">10</option>
+              <option value="11" selected>11</option>
+              <option value="12">12</option>
+              <option value="13">13</option>
+              <option value="14">14</option>
+              <option value="15">15</option>
+              <option value="16">16</option>
+              <option value="17">17</option>
+              <option value="18">18</option>
+              <option value="19">19</option>
+              <option value="20">20</option>
+              <option value="21">21</option>
+              <option value="22">22</option>
+              <option value="23">23</option>
+            </select>:
+            <select id="select_start_minute" type="text" class="form-control select-time" name="start_minute">
+              <option value="00" selected>00</option>
+              <option value="05">05</option>
+              <option value="10">10</option>
+              <option value="15">15</option>
+              <option value="20">20</option>
+              <option value="25">25</option>
+              <option value="30">30</option>
+              <option value="35">35</option>
+              <option value="40">40</option>
+              <option value="45">45</option>
+              <option value="50">50</option>
+              <option value="55">55</option>
+            </select>
+            <label>Length: </label>
+            <select class="form-control select-time-length" id="select_time_length">
+              <option value="30">1/2 minute</option>
+              <option value="60">1 minute</option>
+              <option value="180">3 minutes</option>
+              <option value="300">5 minutes</option>
+              <option value="1800" selected>30 minutes</option>
+              <option value="3600">1 hour</option>
+              <option value="7200">2 hour</option>
+              <option value="14400">4 hour</option>
+            </select>
+          </div>
+
+        </div>
+        <div class="col-sm-12 mt-2 mb-2">
+          <button class="btn btn-success float-right" id="btn_add_auto_station" name="add_station">Add</button>
+        </div>
+        <div class="col-sm-12">
+          <table class="table" id="pa_auto_radio_table">
+            <thead>
+              <tr>
+                <th>Station</th>
+                <th>Start</th>
+                <th>Play seconds</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="auto_station_list">
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('modals/modal_auto_radio_edit.ejs'); %>
+
+
+<%- include('scripts.ejs'); %>
+<script src="/public/js/select2.min.js"></script>
+<script type="text/javascript" src="/public/js/pa_auto_radio.js"></script>
+<%- include('footer.ejs'); %>

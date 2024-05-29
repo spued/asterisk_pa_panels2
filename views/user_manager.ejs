@@ -1,0 +1,216 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"><!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+        </div><!-- /.container-fluid -->
+    </div><!-- /.content-header -->
+<!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">รายชื่อผู้ใช้งาน</h3>
+
+                </div>
+                    <div class="card-body table-responsive p-3">
+                        <div class="row mb-2">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-striped" id="user_table">
+                                    <thead>
+                                        <tr><th>ชื่ออีเมล์</th><th>เลขนำ</th><th>สถานะ</th><th>ชนิด</th><th>แอคชั่น</th></tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tfoot>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                    </div>
+</div>
+        </div><!-- /.container-fluid -->
+    </div><!-- /.content -->
+</div>
+<%- include('modals/modal_edit_user.ejs'); %>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+    var main_user_table = null;
+    $(function() {
+        main_user_table = $('#user_table').DataTable({
+            ajax: {
+                url : '/list_user',
+                type : 'POST',
+                data : function ( _data ) {
+                    _data._id = 0;
+                    return JSON.stringify( _data );
+                        },
+                contentType : 'application/json'
+            },
+            processing: true,
+            serverSide: false,
+            columnDefs: [
+                {"targets": 3,"orderable": false},
+                {"targets": 4,"orderable": false}
+            ],
+            order : [[ 0, "desc" ]],
+            language: {
+                emptyTable: "ยังไม่มีข้อมูล"
+            },
+            columns: [
+                { data: {},
+                    render: function (_d){
+                        return _d.email + ' -- (' +_d.name + ')';
+                    }
+                },
+                { data: 'prefix' },
+                { data: 'status' },
+                { data: 'type' },
+                { 
+                    data: {},
+                    render: function (_d){
+                        //console.log(_d);
+                        return '<button id="' + _d._id + '" class="btn btn-warning btn-edit-user">แก้ไข</button>' + 
+                            '<button id="' + _d._id + '" class="btn btn-danger btn-delete-user">ลบ</button> </div>';
+                    }
+                }
+            ],
+            createdRow: function( row, data, dataIndex ) {
+                $(row).attr( 'user-id', data._id );
+            },
+            initComplete: function(settings, json) {
+
+            }
+        });
+
+        $(document).on('click','.btn-logo-upload', function(event) {
+            var modal = $('#modal_edit_user');
+            var formData = new FormData();
+            formData.append('user_id', modal.attr('user-id'));
+            // Attach file
+            formData.append('imgfile', $('#imgfile')[0].files[0]);
+
+            $.ajax({
+                url: '/upload_logo',
+                type: 'post',
+                dataType: 'multipart/form-data',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).done(function(_data) {
+                //console.log(_data);
+                if(_data.code == 0) {
+                    modal.find('#e_logo').attr('src','/public/img/'+ _data.fn);
+                }
+                else {
+                    alert('File upload failed!');
+                }
+            })
+            modal.modal('hide');
+        })
+        $(document).on('click','.btn-edit-user', function (event) { 
+            let data = $(this).closest("tr");
+            //console.log(data.attr('user-id'));
+            let _uid = data.attr('user-id');
+            var modal = $('#modal_edit_user');
+            modal.modal();
+
+            $.ajax({
+                url : '/get_user_id',
+                method: 'post',
+                data:  { userid: _uid,
+                    type: 'user' 
+                } 
+            }).done(function( data ) {
+                /* if ( console && console.log ) {
+                console.log( "Sample of data:", data );
+                } */
+                if(data.length > 0) {
+                    modal.attr('user-id', _uid);
+                    modal.find('#e_name').val(data[0].name);
+                    modal.find('#e_email').val(data[0].email);
+                    modal.find('#e_type').val(data[0].type);
+                    modal.find('#e_message').val(data[0].message);
+                    modal.find('#e_prefix').val(data[0].prefix).trigger('change');
+                    modal.find('#e_status').val(data[0].status).trigger('change');
+                    modal.find('#e_sip_account').val(data[0].sip_account);
+                    modal.find('#e_sip_password').val(data[0].sip_password);
+                    modal.find('#e_api_key').val(data[0].api_key);
+                    if(data[0].logo_url != '-') modal.find('#e_logo').attr('src','/public/img/' +  data[0].logo_url);
+                    else modal.find('#e_logo').attr('src','/public/img/mylogo.png');
+                }
+                else { 
+                    return 0; 
+                }
+            });
+        })
+
+        $(document).on('submit','#form_edit_user', function (event) { 
+            var modal = $('#modal_edit_user');
+            const _pass_1 = $('#e_password_1').val();
+            const _pass_2 = $('#e_password_2').val();
+            var _pass = '';
+
+            if((_pass_1 != '') && (_pass_2 != '')) {
+                if(_pass_1  == _pass_2 ) {
+                    _pass = _pass_1;
+                }
+                else {
+                    alert("รหัสผ่านไม่ตรงกัน");
+                }
+            }
+
+            let _post_data = {
+                user_id: modal.attr('user-id'),
+                email: $('#e_email').val(),
+                password: _pass,
+                type: $('#e_type').val(),
+                message: $('#e_message').val(),
+                prefix: $('#e_prefix').val(),
+                status: $('#e_status').val(),
+                sip_account: $('#e_sip_account').val(),
+                sip_password: $('#e_sip_password').val(),
+                api_key: $('#e_api_key').val()
+            }
+            //console.log(_post_data);
+            $.ajax({
+                url : '/set_user_id',
+                method: 'post',
+                data: _post_data,
+            }).done(function( data ) {
+            });
+        })
+        $(document).on('click','.btn-delete-user', function (event) { 
+            let data = $(this).closest("tr");
+            //console.log(data.attr('user-id'));
+            let _uid = data.attr('user-id');
+            var modal = $('#modal_edit_user');
+
+            if (confirm('ชื่อผู้ใช้งานจะถูกลบ?')) {
+                // Save it!
+                let _post_data = {
+                user_id: _uid
+                }
+                //console.log(_post_data);
+                $.ajax({
+                    url : '/delete_user_id',
+                    method: 'post',
+                    data: _post_data,
+                }).done(function( data ) {
+                    console.log('Thing was saved to the database.');
+                    window.location.replace('/user_manager');
+                });
+
+            } else {
+                // Do nothing!
+                return 0;
+            }
+        })
+    })
+</script>
+<%- include('footer.ejs'); %>

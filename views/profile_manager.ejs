@@ -1,0 +1,59 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper"><!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+        </div><!-- /.container-fluid -->
+    </div><!-- /.content-header -->
+<!-- Main content -->
+    <div class="content">
+        <div class="container-fluid">
+            <h3> บริหารจัดการข้อมูลผู้ใช้งาน </h3>
+            <form action="/file_manage" enctype="multipart/form-data" method="POST">
+                <div class="row mb-2">
+                    <div class="col-sm-12">
+                        <p>
+                            <span>พาสเวิร์ดใหม่:</span>
+                            <input type="password" style="width:300px;" class="form-control" id="password_1"  name="pasword_1">
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                        <p>
+                            <span>พาสเวิร์ดทบทวน:</span>
+                            <input type="password" style="width:300px;" class="form-control" id="password_2"  name="pasword_2">
+                        </p>
+                    </div>
+                    <div class="col-sm-12">
+                        <input  type="button" class="form-control btn btn-info btn-float-right" id ="btn_update_password" style="width:100px;" value="Update"></input>
+                    </div>
+                </div>
+            </form>
+        </div><!-- /.container-fluid -->
+    </div><!-- /.content -->  
+</div>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+    $(function(){ 
+        $("#btn_update_password").on('click',function(evt){
+            let _post_data = {
+                password_1 : $('#password_1').val(),
+                password_2 : $('#password_2').val()
+            };
+            $.post('/profile_pass_update', _post_data, function(res){
+                //console.log(res);
+                if(res.code == 0) {
+                    alert('เปลี่ยนพาสเวิร์ดแล้ว');
+                    $('#password_1').val('')
+                    $('#password_2').val('')
+                } else {
+                    alert("เกิดความผิดพลาด: " + res.message);
+                }
+            })
+        })
+    })
+</script>
+
+<%- include('footer.ejs'); %>

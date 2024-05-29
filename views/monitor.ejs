@@ -1,0 +1,392 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <h3> ระบบมอนิเตอร์ อุปกรณ์ในระบบประกาศ</h3>
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-title">
+              <div class="row">
+                <div class="col-md-12">
+                  <!-- Line chart -->
+                  <div class="card card-primary card-outline">
+                    <div class="card-header">
+                      <h3 class="card-title">
+                        <i class="far fa-chart-bar"></i>
+                        กราฟแสดงการใช้งานระบบ
+                      </h3>
+                      <div class="card-tools">
+                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                          <label class="btn bg-olive active">
+                            <input type="radio" class="btn-graph" name="graph_options" id="graph_hour" autocomplete="off" checked> 1 ชม.
+                          </label>
+                          <label class="btn bg-olive">
+                            <input type="radio" class="btn-graph" name="graph_options" id="graph_day" autocomplete="off"> 1 วัน
+                          </label>
+                          <label class="btn bg-olive">
+                            <input type="radio" class="btn-graph" name="graph_options" id="graph_week" autocomplete="off"> 7 วัน
+                          </label>
+                        </div>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                          <i class="fas fa-minus"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div id="line-chart" style="height: 300px;"></div>
+                    </div>
+                    <!-- /.card-body-->
+                  </div>
+                  <!-- /.card -->
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">จำนวนอุปกรณ์ทั้งหมด</span>
+                      <span class="info-box-number h3" id="total_device">
+                        0
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-success elevation-1"><i class="fas fa-thumbs-up"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">ออนไลน์</span>
+                      <span class="info-box-number text-success h3" id="online_device">
+                        0
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-power-off"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">ออฟไลน์</span>
+                      <span class="info-box-number text-danger h3" id="offline_device">
+                        0
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                  <div class="info-box">
+                    <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-volume-up"></i></span>
+                    <div class="info-box-content">
+                      <span class="info-box-text">ใช้งานอยู่</span>
+                      <span class="info-box-number h3" id="using_device">
+                        0
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div id="over_all_monitor"></div>
+                </div>
+
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-title">
+            </div>
+            <div class="card-body">
+              <label> เลือกพื้นที่ </label>
+              <div class="row">
+                <div class="col-sm-8">
+                  <select class="form-control select" id="select_location" name="select_location">
+                  </select>
+                </div>
+                <div class="col-sm-4">
+
+                </div>
+
+                <div class="col-sm-12">
+                  <p></p>
+                  <table class="table" id="extension_table">
+                    <thead>
+                      <tr>
+                        <th>ลำโพง/หมายเลข</th>
+                        <th>ชื่อ</th>
+                        <th>สถานะ</th>
+                      </tr>
+                    </thead>
+                    <tbody id="extension_list">
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  $(function() {
+    var flot_graph = null;
+    if (!sessionStorage.graph_type) sessionStorage.graph_type = 'graph_hour';
+    var current_graph = sessionStorage.getItem('graph_type');
+
+    function refresh_stats() {
+      document.getElementById("over_all_monitor").innerHTML = 'Refreshing';
+      $.post('/device_list_all', {
+        _id: 0
+      }, function(res) {
+        //console.log(res);
+        $('#total_device').text(res.data.length);
+        var html = '';
+        var offline_device = 0;
+        var online_device = 0;
+        var using_device = 0;
+
+        res.data.forEach(function(data, ind) {
+          //console.log(data);
+          switch (data.state) {
+            case "0":
+              html += '<span title="หมายเลข ' + data.number + '" class="red_dot"></span>';
+              offline_device++;
+              break;
+            case "1":
+              html += '<span title="หมายเลข ' + data.number + '" class="green_dot"></span>';
+              online_device++;
+              break;
+            case "2":
+              html += '<span title="หมายเลข ' + data.number + '" class="yellow_dot"></span>';
+              using_device++;
+              break;
+            default:
+              html += '<span class="dot"></span>';
+              break;
+          }
+        })
+        document.getElementById("over_all_monitor").innerHTML = html;
+        $('#online_device').text(online_device);
+        $('#offline_device').text(offline_device);
+        $('#using_device').text(using_device);
+      })
+    }
+
+    function refresh_graph() {
+      $.post('/device_graph_data', {
+        type: sessionStorage.getItem('graph_type')
+      }, function(res) {
+        //console.log(res);
+        // LINE CHART
+        var offline = [],
+          online = [],
+          using = [];
+        var itemsProcessed = 0;
+        res.data.forEach(function(data, ind, array) {
+          //console.log(ind);
+          //console.log(data);
+          var _time = data.time + 25200; // GMT + 7 for Thailand
+          offline.push([_time, data.values.offline_device])
+          online.push([_time, data.values.online_device])
+          using.push([_time, data.values.using_device])
+
+          itemsProcessed++;
+          if (itemsProcessed === array.length) {
+            _callback();
+          }
+
+        })
+
+        function _callback() {
+          //console.log('-- Reload Load data done'); 
+          var line_data1 = {
+            label: 'ออฟไลน์',
+            data: offline,
+            color: '#ee0000'
+          }
+          var line_data2 = {
+            label: 'ออนไลน์',
+            data: online,
+            color: '#00e000'
+          }
+          var line_data3 = {
+            label: 'ใช้งาน',
+            data: using,
+            color: '#eecc00'
+          }
+
+          //console.log('Plot graph.');
+          var time_format = "%H:%M";
+          if (sessionStorage.graph_type == 'graph_week') time_format = "%a:%d";
+
+          flot_graph = $.plot('#line-chart', [line_data1, line_data2, line_data3], {
+            grid: {
+              hoverable: true,
+              borderColor: '#f3f3f3',
+              borderWidth: 1,
+              tickColor: '#f3f3f3'
+            },
+            series: {
+              shadowSize: 0,
+              lines: {
+                show: true
+              },
+              points: {
+                show: false
+              }
+            },
+            lines: {
+              fill: false,
+              color: ['#3c8dbc', '#f56954', '#f44954']
+            },
+            yaxis: {
+              show: true
+            },
+            xaxis: {
+              mode: "time",
+              timeBase: "seconds",
+              timeformat: time_format
+            }
+          })
+          //Initialize tooltip on hover
+          $('<div class="tooltip-inner" id="line-chart-tooltip"></div>').css({
+            position: 'absolute',
+            display: 'none',
+            opacity: 0.8
+          }).appendTo('body')
+          $('#line-chart').bind('plothover', function(event, pos, item) {
+            if (item) {
+              var x = item.datapoint[0],
+                y = item.datapoint[1]
+
+              $('#line-chart-tooltip').html(item.series.label + ' = ' + y)
+                .css({
+                  top: item.pageY + 5,
+                  left: item.pageX + 5
+                })
+                .fadeIn(200)
+            } else {
+              $('#line-chart-tooltip').hide()
+            }
+
+          })
+
+
+        }
+      })
+
+    }
+    // refresh every 15 seconds. 
+    setInterval(function() {
+      refresh_stats();
+      refresh_graph();
+    }, 15000);
+
+    $.post("/location_list", {
+      from: 'monitor'
+    }, function(res) {
+      //console.log(res);
+      $.each(res, function(i, item) {
+        $('#select_location').append($('<option>', {
+          value: item.name,
+          text: item.name
+        }));
+      });
+    }).then(function() {
+      //console.log(sessionStorage.location_id + ',' + sessionStorage.location_name)
+      $('#select_location').select2({});
+      if (sessionStorage.location_id != undefined) {
+        $('#select_location').val(sessionStorage.location_name).trigger('change');
+      }
+    })
+    refresh_stats();
+    refresh_graph();
+    $('#' + current_graph).trigger('click');
+    $('#select_location').on('change', function(evt) {
+      $.post('/location_name', {
+        name: $(this).val()
+      }, function(_res) {
+        //console.log(_res);
+        /* $('#location_number').val(_res.number);
+        $('#page_location_id').val(_res._id);
+        $('#current_location_name').text(_res.name);
+        $('#current_number').text(_res.number); */
+
+        sessionStorage.location_id = _res._id;
+        sessionStorage.location_name = _res.name;
+
+        let _post_data = {
+          _id: _res._id
+        };
+        $.post('/device_list', _post_data, function(res) {
+          let html = '';
+          //console.log(res);
+          res.data.forEach(element => {
+            //console.log(element.device_state[0]);
+            html += '<tr><td>' + element.number + '</td><td>' + element.name;
+            if (element.device_state.length > 0) {
+              switch (element.device_state[0].state) {
+                case "0":
+                  html += '</td><td><i class="nav-icon fas fa-window-close text-danger"></i>ไม่พร้อมใช้งาน';
+                  break;
+                case "1":
+                  html += '</td><td><i class="nav-icon fas fa-bullhorn text-success"></i>พร้อมใช้งาน';
+                  break;
+                case "2":
+                  html += '</td><td><i class="nav-icon fas fa-volume-up text-warning"></i>ใช้งานอยู่';
+                  break;
+                default:
+                  html += '</td><td><i class="nav-icon fas fa-window-close text-warning"></i>หมายเลขไม่มี';
+                  break;
+              }
+            } else {
+              html += '</td><td><i class="nav-icon fas fa-window-close text-warning"></i>หมายเลขไม่มี';
+            }
+            html += '</td></tr>';
+          });
+          $('#extension_list').html(html);
+        })
+      })
+    });
+    $('.btn-graph').on('click', function(evt) {
+      //console.log(this.id);
+      switch (this.id) {
+        case "graph_hour":
+          sessionStorage.setItem('graph_type', 'graph_hour');
+          refresh_graph();
+          break;
+        case "graph_day":
+          sessionStorage.setItem('graph_type', 'graph_day');
+          refresh_graph();
+          break;
+        case "graph_week":
+          sessionStorage.setItem('graph_type', 'graph_week');
+          refresh_graph();
+          break;
+        default:
+          sessionStorage.setItem('graph_type', 'graph_hour');
+          refresh_graph();
+          break;
+      }
+    })
+  })
+</script>
+
+<%- include('footer.ejs'); %>

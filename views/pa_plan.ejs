@@ -1,0 +1,265 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="form-group justify-content-between">
+            <button class='btn btn-success float-right' id="btn_add_plan"> เพิ่มแผน </button>
+          </div>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <table class="table" id="pa_plan_table">
+            <thead>
+              <tr>
+                <th>ชื่อ</th>
+                <th>ชนิด-ลำดับ</th>
+                <th>ช่วงเวลา</th>
+                <th>ไฟล์เสียง</th>
+                <th>แอคชั่น</th>
+              </tr>
+            </thead>
+            <tbody id="plan_list">
+            </tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <input type="hidden" id="current_file_id" value="0" />
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('modals/modal_pa_plan_add.ejs'); %>
+<%- include('modals/modal_pa_plan_edit.ejs'); %>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  $(function() {
+    var file_detail_list = null;
+    var pa_plan_table = null;
+    var _post_data = {
+      _id: 0
+    }
+    $.post("/file_list", function(res) {
+      //console.log(res);
+      file_detail_list = res;
+      $.each(res, function(i, item) {
+        $('.select_file').append($('<option>', {
+          value: item.name,
+          text: item.originalname,
+          mimetype: item.img.contentType,
+          file_id: item._id
+        }));
+      });
+    }).then(function() {
+      pa_plan_table = $('#pa_plan_table').DataTable({
+        ajax: {
+          url: '/pa_plan_list',
+          type: 'POST',
+          data: function(_data) {
+            _data._id = 0;
+            return JSON.stringify(_data);
+          },
+          contentType: 'application/json'
+        },
+        processing: true,
+        serverSide: false,
+        columnDefs: [{}],
+        order: [
+          [0, "desc"]
+        ],
+        columns: [{
+            data: 'name'
+          },
+          {
+            data: {},
+            render: function(data) {
+              var html = '';
+              html = data.type + ' - ' + data.priority;
+              return html;
+            }
+          },
+          {
+            data: {},
+            render: function(data) {
+              var html = '';
+              _time = JSON.parse(data.play_time);
+              if (data.type == 'daily') {
+                html = _time.hour;
+              } else if (data.type == 'weekly') {
+                html = _time.day + ' at ' + _time.hour;
+              } else if (data.type == 'monthly') {
+                html = _time.date + ' at ' + _time.hour;
+              } else if (data.type == 'special') {
+                html = _time.month + ', ' + _time.date + ' at ' + _time.hour;
+              } else {
+                html = 'unknow';
+              }
+              return html;
+            }
+          },
+          {
+            data: 'file_id',
+            render: function(data) {
+              let html = '';
+              let _file = file_detail_list.find(element => element._id == data);
+              //console.log(_file);
+              if (_file) html = _file.originalname;
+              else html = 'unknow';
+              return html;
+            }
+          },
+          {
+            data: {},
+            render: function(_d) {
+              //console.log(_d);
+              return '<button id="' + _d._id +
+                '" class="btn btn-danger btn-delete-plan">ลบ</button>' +
+                '<button id="' + _d._id +
+                '" class="btn btn-warning btn-edit-plan">แก้ไข</button>';
+            }
+          }
+        ],
+        createdRow: function(row, data, dataIndex) {
+          $(row).attr('data_row_id', data._id);
+        },
+        initComplete: function(settings, json) {
+
+        }
+      });
+    })
+    $('#btn_add_plan').on('click', function(event) {
+      var modal = $('#modal_add_pa_plan');
+      $('#current_file_id').val('0');
+      modal.find('#e_select_file').val('-').trigger('change');
+      modal.modal();
+    })
+    $('#btn_add_plan_data').on('click', function(event) {
+
+      var modal = $('#modal_add_pa_plan');
+      let current_file_id = $('#current_file_id').val();
+      const _post_data = {
+        name: modal.find('#pa_plan_name').val(),
+        type: modal.find('#select_type').val(),
+        hour: $('#pa_plan_hour').val(),
+        day: $('#pa_plan_weekday').val(),
+        date: $('#pa_plan_date').val(),
+        month: $('#pa_plan_month').val(),
+        filename: modal.find('#select_file').val(),
+        file_id: current_file_id,
+        owner: "<%= user._id %>"
+      };
+      //console.log(_post_data);
+      $.post('/pa_plan_add', _post_data, function(res) {
+        //console.log(res);
+        modal.modal('hide');
+        setTimeout(function() {
+          pa_plan_table.ajax.reload()
+        }, 500);
+      })
+    })
+
+    $(document).on('click', '.btn-edit-plan', function(event) {
+      //console.log($(this).attr('id'));
+      let _id = $(this).attr('id');
+      var modal = $('#modal_edit_pa_plan');
+      modal.find('#pa_plan_id').val(_id);
+      modal.modal();
+
+      $.post('/pa_plan_id', {
+        _id: _id
+      }, function(res) {
+        //console.log(res);
+        var _date = JSON.parse(res.play_time);
+        // modal.find('#e_id').val(res._id);
+        modal.find('#e_pa_plan_name').val(res.name);
+        modal.find('#e_select_status').val(res.status).trigger('change');
+        modal.find('#e_select_type').val(res.type).trigger('change');
+        modal.find('#e_select_priority').val(res.priority).trigger('change');
+        modal.find('#e_pa_plan_hour').val(_date.hour).trigger('change');
+        modal.find('#e_pa_plan_weekday').val(_date.day).trigger('change');
+        modal.find('#e_pa_plan_date').val(_date.date).trigger('change');
+        modal.find('#e_pa_plan_month').val(_date.month).trigger('change');
+        modal.find('#e_select_file').val(res.filename).trigger('change');
+        modal.find('#e_select_file_lock').val(res.file_lock).trigger('change');
+      })
+    })
+    $('#btn_edit_plan_data').on('click', function(event) {
+      var modal = $('#modal_edit_pa_plan');
+      let current_file_id = $('#current_file_id').val();
+
+      function validateTime(time) {
+        const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+        return time.match(timeReg)
+      }
+      let _hour = $('#e_pa_plan_hour').val();
+      _hour = _hour.replace('.', ':');
+      if (!validateTime(_hour)) {
+        alert("เวลาไม่ถูกต้อง");
+        return 0;
+      };
+      const _post_data = {
+        _id: modal.find('#pa_plan_id').val(),
+        name: modal.find('#e_pa_plan_name').val(),
+        type: modal.find('#e_select_type').val(),
+        priority: modal.find('#e_select_priority').val(),
+        hour: _hour,
+        day: $('#e_pa_plan_weekday').val(),
+        date: $('#e_pa_plan_date').val(),
+        month: $('#e_pa_plan_month').val(),
+        filename: modal.find('#e_select_file').val(),
+        file_lock: modal.find('#e_select_file_lock').val(),
+        file_id: current_file_id,
+        status: modal.find('#e_select_status').val()
+      };
+      $.post("/pa_plan_save", _post_data, function(res) {
+        //console.log(res);
+        modal.modal('hide');
+
+      }).then(function() {
+        if (modal.find('#e_select_file_lock').val() == "1") {
+          //console.log("File locked change the file in schedule too.")
+          $.post("/auto_pa_update_file", {
+            plan_id: modal.find('#pa_plan_id').val(),
+            file_id: current_file_id,
+            file_name: modal.find('#e_select_file').val()
+          }, function(res) {})
+        }
+        setTimeout(function() {
+          pa_plan_table.ajax.reload()
+        }, 1000);
+      })
+    })
+
+    $(document).on('click', '.btn-delete-plan', function(event) {
+      //console.log($(this).attr('id'));
+      if (confirm('ต้องการลบรายการนี้?') == true) {
+        $.post('/pa_plan_delete', {
+          _id: $(this).attr('id')
+        }, function(res) {
+          setTimeout(function() {
+            pa_plan_table.ajax.reload()
+          }, 1000);
+        })
+      } else {
+
+      }
+    })
+
+    $(document).on('change', '.select_file', function(event) {
+      $('#current_file_id').val($('option:selected', this).attr('file_id'));
+    });
+  })
+</script>
+<%- include('footer.ejs'); %>

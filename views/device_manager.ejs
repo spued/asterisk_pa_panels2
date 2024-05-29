@@ -1,0 +1,351 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="form-group justify-content-between">
+            <button class='btn btn-danger float-right' id="btn_delete_location" hidden> ลบพื้นที่ </button>
+            <button class='btn btn-warning float-right' id="btn_edit_location" hidden> แก้ไขพื้นที่ </button>
+            <button class='btn btn-success float-right' id="btn_add_location" hidden> เพิ่มพื้นที่ </button>
+          </div>
+          <input type="hidden" id="page_user_id" value="<%- user_id -%>" />
+          <label class="h3" for="select_location">
+            อุปกรณ์ในพื้นที่ชื่อ: <i class="badge badge-info" id="current_location_name"></i>
+            หมายเลข: <i class="badge badge-info" id="current_number"></i></label>
+          <select class="form-control custom-select select-user" id="select_user">
+            <option value="default">เลือกผู้ใช้งาน</option>
+          </select>
+          <select class="form-control custom-select" id="select_location">
+            <option value="default">เลือกพื้นที่</option>
+          </select>
+
+          <div class="form-group justify-content-between">
+            <button class='btn btn-success float-right' id="btn_add_device" hidden> เพิ่มอุปกรณ์ </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <table class="table" id="device_table">
+            <thead>
+              <tr>
+                <th>ลำโพง/หมายเลข</th>
+                <th>ชื่อ</th>
+                <th>แอคชั่น</th>
+              </tr>
+            </thead>
+            <tbody id="device_list">
+            </tbody>
+            <tfoot>
+              <%# <tr><th>Extensions</th><th>Status</th></tr> %>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('modals/modal_add_device.ejs'); %>
+<%- include('modals/modal_edit_device.ejs'); %>
+<%- include('modals/modal_add_location.ejs'); %>
+<%- include('modals/modal_edit_location.ejs'); %>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  var current_user = null;
+  var current_location = {};
+  var deviceTable = null;
+  const _user_id = $('#page_user_id').val();
+  $(function() {
+    $.post("/list_user", function(res) {
+      $.each(res.data, function(i, item) {
+        $('#select_user').append($('<option>', {
+          value: item._id,
+          text: item.email,
+          name: item.name
+        }));
+      });
+    }).then(function() {
+      $('#select_user').select2({});
+      $('#select_location').select2({});
+      if (_user_id != '-') $('#select_user').val(_user_id).trigger('change');
+    })
+
+    $('#select_user').on('change', function(evt) {
+      $.post('/get_user_id', {
+        userid: $(this).val()
+      }, function(_res) {
+        //console.log(_res);
+        current_user = _res[0];
+      }).then(function() {
+        $("#select_location").val(null).empty().select2('destroy')
+        //console.log(current_user);
+        $.post("/location_list_id", {
+          user_id: current_user._id
+        }, function(res) {
+          //console.log(res);
+          $('#select_location').append($('<option>', {
+            value: '0',
+            text: 'เลือกพื้นที่',
+            _id: 0
+          }));
+          $.each(res, function(i, item) {
+            $('#select_location').append($('<option>', {
+              value: item._id,
+              text: item.name
+            }));
+          });
+          $('#select_location').select2({});
+          $('#btn_add_location').prop('hidden', false);
+          $('#btn_delete_location').prop('hidden', true);
+          $('#btn_edit_location').prop('hidden', true);
+          $('#btn_add_device').prop('hidden', true);
+          current_location._id = '0';
+          deviceTable.ajax.reload();
+        })
+      })
+    })
+    deviceTable = $('#device_table').DataTable({
+      ajax: {
+        url: '/device_list',
+        type: 'POST',
+        data: function(_data) {
+          if (current_location) _data._id = current_location._id;
+          else _data._id = 0;
+          return JSON.stringify(_data);
+        },
+        contentType: 'application/json'
+      },
+      processing: true,
+      serverSide: false,
+      columnDefs: [{}],
+      order: [
+        [0, "asc"]
+      ],
+      language: {
+        emptyTable: "ยังไม่มีข้อมูล โปรดเลือกพื้นที่"
+      },
+      columns: [{
+          data: 'number'
+        },
+        {
+          data: 'name'
+        },
+        {
+          data: {},
+          render: function(_d) {
+            //console.log(_d);
+            return '<button id="' + _d._id +
+              '" class="btn btn-danger btn-delete-device">ลบ</button>' +
+              '<button id="' + _d._id +
+              '" class="btn btn-warning btn-edit-device">แก้ไข</button>';
+          }
+        }
+      ],
+      createdRow: function(row, data, dataIndex) {
+        $(row).attr('data_row_id', data._id);
+      },
+      initComplete: function(settings, json) {}
+    })
+    $('#select_location').on('change', function(evt) {
+      $.post('/location_id', {
+        _id: $(this).val()
+      }, function(_res) {
+        //console.log(_res);
+        current_location = _res.data;
+
+      }).then(function() {
+        let loc_id = current_location._id;
+        //console.log("current location = " + loc_id);
+        if (loc_id != undefined) {
+          $('#btn_delete_location').prop('hidden', false);
+          $('#btn_edit_location').prop('hidden', false);
+          $('#btn_add_device').prop('hidden', false);
+          deviceTable.ajax.reload();
+        } else {
+          $('#btn_delete_location').prop('hidden', true);
+          $('#btn_edit_location').prop('hidden', true);
+          $('#btn_add_device').prop('hidden', true);
+        }
+
+        $('#current_location_name').text(current_location.name);
+        $('#current_number').text(current_location.number);
+      })
+    })
+
+    $('#btn_add_device').on('click', function(event) {
+      var modal = $('#modal_add_device');
+      modal.modal();
+    })
+
+    $('.btn-add-device-data').on('click', function(event) {
+      var modal = $('#modal_add_device');
+      //console.log(current_user);
+      const _post_data = {
+        name: modal.find('#name').val(),
+        number: modal.find('#number').val(),
+        sn: modal.find('#sn').val(),
+        device_type: modal.find('#select_type').val(),
+        location: $('#current_location_name').text(),
+        parent_id: current_location._id,
+        owner: current_user.name,
+        owner_id: current_user._id,
+        desc: modal.find('#name').val() + ',' + modal.find('#sn').val() + ',' + modal.find('#select_type').val()
+      };
+      $.post('/device_add', _post_data, function(res) {
+        //console.log(res);
+        modal.modal('hide');
+        deviceTable.ajax.reload();
+      })
+
+    })
+
+    $(document).on('click', '.btn-delete-device', function(event) {
+      //console.log($(this).attr('id'));
+      if (confirm('ต้องการลบอุปกรณ์?') == true) {
+        $.post('/device_delete', {
+          _id: $(this).attr('id')
+        }, function(res) {
+          deviceTable.ajax.reload();
+        })
+      } else {
+
+      }
+    })
+    $(document).on('click', '.btn-edit-device', function(event) {
+      //console.log($(this).attr('id'));
+      var modal = $('#modal_edit_device');
+      modal.modal();
+
+      $.post('/device_id', {
+        _id: $(this).attr('id')
+      }, function(res) {
+        //console.log(res);
+        modal.find('#e_id').val(res._id);
+        modal.find('#e_number').val(res.number);
+        modal.find('#e_name').val(res.name);
+        modal.find('#e_sn').val(res.sn);
+        modal.find('#e_select_type').val(res.device_type).trigger('change');
+      })
+    })
+    $('.btn-save-device-data').on('click', function(event) {
+      var modal = $('#modal_edit_device');
+      const _post_data = {
+        id: modal.find('#e_id').val(),
+        name: modal.find('#e_name').val(),
+        number: modal.find('#e_number').val(),
+        sn: modal.find('#e_sn').val(),
+        device_type: modal.find('#e_select_type').val()
+      };
+      $.post("/device_save", _post_data, function(res) {
+        //console.log(res);
+        modal.modal('hide');
+        deviceTable.ajax.reload();
+      })
+    })
+    $('#btn_add_location').on('click', function(event) {
+      var modal = $('#modal_add_location');
+      modal.modal();
+    })
+
+    $('#btn_edit_location').on('click', function(event) {
+      var modal = $('#modal_edit_location');
+      $.post("/list_user", function(res) {
+        modal.find('#select_user').find('option').remove().end();
+        $.each(res.data, function(i, item) {
+          modal.find('#select_user').append($('<option>', {
+            value: item._id,
+            text: item.email,
+            name: item.name
+          }));
+        });
+      }).then(function() {
+        modal.find('#select_user').select2({});
+        modal.find('#select_user').val(current_user._id).trigger('change');
+      })
+
+      $.post('/location_id', {
+        _id: current_location._id
+      }, function(res) {
+        //console.log(res);
+        let location_data = res.data;
+        modal.find('#e_location_id').val(location_data._id);
+        modal.find('#e_location_name').val(location_data.name);
+        modal.find('#e_location_number').val(location_data.number);
+        modal.find('#e_location_address').val(location_data.address);
+      })
+      modal.modal();
+    })
+
+    $('.btn-save-location').on('click', function(event) {
+      //console.log("location save");
+      var modal = $('#modal_edit_location');
+      let owner_id = current_user._id;
+      let owner_name = current_user.name;
+      let _new_owner_id = modal.find('#select_user option:selected').val();
+      let _new_owner_name = modal.find('#select_user option:selected').text();
+      console.log(current_user._id + ' = ' + _new_owner_id + ':' + _new_owner_name);
+      if (current_user._id != _new_owner_id) {
+        owner_id = _new_owner_id;
+        owner_name = _new_owner_name;
+      }
+      const _post_data = {
+        id: $('#e_location_id').val(),
+        name: $('#e_location_name').val(),
+        number: $('#e_location_number').val(),
+        address: $('#e_location_address').val(),
+        owner: owner_name,
+        owner_id: owner_id
+      };
+      $.post("/location_save", _post_data, function(res) {
+        //console.log(res);
+        modal.modal('hide');
+        window.location.href = "/device_manager/" + current_user._id;
+      })
+
+    })
+
+    $('#btn_delete_location').on('click', function(event) {
+      if (confirm('การลบพื้นที่จะให้ข้อมูบที่เกี่ยวข้องหายไป ยืนยันการลบพื้นที่?') == true) {
+        $.post('/location_delete', {
+          _id: current_location._id
+        }, function(res) {
+          window.location.href = "/device_manager/" + current_user._id;
+        })
+      } else {
+        return 0;
+      }
+    })
+
+    $('.btn-add-location').on('click', function(event) {
+      //console.log("location submitted");
+      var modal = $('#modal_add_location');
+      const _post_data = {
+        name: $('#location_name').val(),
+        number: $('#location_number').val(),
+        address: $('#location_address').val(),
+        owner: current_user.name,
+        owner_id: current_user._id
+      };
+      $.post("/location_add", _post_data, function(res) {
+        //console.log(res);
+        if (res.code == 0) {
+          modal.modal('hide');
+          window.location.href = "/device_manager/" + current_user._id;
+        }
+      })
+    })
+  })
+</script>
+<%- include('footer.ejs'); %>

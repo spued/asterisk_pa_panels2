@@ -1,0 +1,49 @@
+<div class="modal fade" id="modal_add_pa_schedule_plan">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มแผน</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/add_pa_schedule_plan" id="form_add_pa_schedule_plan">
+          <div class="row">
+            <div class="col-md-12">
+              เลือกเทมเพลต
+              <select class="form-control select select2 select_pa_plan" id="select_pa_plan" name="select_schedule">
+                <option value="default">เลือก</option>
+              </select>
+              <input type="hidden" id="pa_plan_type" value="default" />
+              <input type="hidden" id="pa_plan_priority" value="0" />
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="pa_plan_hour">ความยาว(วินาที)</label>
+                <input type="text" class="form-control" id="pa_plan_duration" name="pa_plan_duration" value="0" placeholder="0" />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="pa_plan_hour">เวลา</label>
+                <input type="hidden" id="pa_plan_play_time_add" value="" />
+                <input type="text" class="form-control" id="pa_plan_hour" name="pa_plan_hour" value="12:00" placeholder="12:00" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              เลือกไฟล์
+              <select class="form-control select select_file" id="select_file" name="select_file">
+                <option value="-">-</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <button type="button" for="form_add_pa_schedule_plan" class="btn btn-primary btn-add-pa-plan-data" id="btn_add_pa_plan_data">เพิ่ม</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,550 @@
+[
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_1",
+		"name": "กรุงเทพมหานคร Live Radio (FM 105 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_2",
+		"name": "กรุงเทพมหานคร Live Radio (FM 97 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_3",
+		"name": "กรุงเทพมหานคร Live Radio (FM 95.5 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_4",
+		"name": "กรุงเทพมหานคร Live Radio (FM 93.5 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_5",
+		"name": "กรุงเทพมหานคร Live Radio (FM 92.5 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_6",
+		"name": "กรุงเทพมหานคร Live Radio (FM 88 MHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_7",
+		"name": "กรุงเทพมหานคร Live Radio (World Service)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_8",
+		"name": "กรุงเทพมหานคร Live Radio (Education)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_9",
+		"name": "กรุงเทพมหานคร Live Radio (AM 918 KHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_10",
+		"name": "กรุงเทพมหานคร Live Radio (AM 891 KHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_11",
+		"name": "กรุงเทพมหานคร Live Radio (AM 837 KHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_12",
+		"name": "กรุงเทพมหานคร Live Radio (AM 819 KHz)",
+		"province": "กรุงเทพมหานคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_13",
+		"name": "กาญจนบุรี (AM 558 KHz)",
+		"province": "กาญจนบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_14",
+		"name": "กาฬสินธุ์ (FM 93 MHz)",
+		"province": "กาฬสินธุ์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_15",
+		"name": "กระบี่ (FM98.5 MHz)",
+		"province": "กระบี่"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_16",
+		"name": "กำแพงเพชร (FM 97.75 MHz)",
+		"province": "กำแพงเพชร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_17",
+		"name": "ขอนแก่น (FM 98.50 MHz) ",
+		"province": "ขอนแก่น"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_18",
+		"name": "ขอนแก่น (FM 99.50 MHz) ",
+		"province": "ขอนแก่น"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_19",
+		"name": "จันทบุรี (FM 90.25 MHz)",
+		"province": "จันทบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_20",
+		"name": "จันทบุรี (AM 1125 KHz)",
+		"province": "จันทบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_21",
+		"name": "ชลบุรี (FM 99.75 MHz)",
+		"province": "ชลบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_22",
+		"name": "ชุมพร (FM 100 MHz)",
+		"province": "ชุมพร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_23",
+		"name": "ขอนแก่น-ชุมแพ (FM 93.25 MHz)",
+		"province": "ขอนแก่น-ชุมแพ"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_24",
+		"name": "ชัยนาท (FM 91.75 MHz)",
+		"province": "ชัยนาท"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_25",
+		"name": "ชัยภูมิ (FM 92.75 MHz)",
+		"province": "ชัยภูมิ"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_26",
+		"name": "เชียงราย (FM 95.75 MHz) ",
+		"province": "เชียงราย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_27",
+		"name": "เชียงใหม่ (FM 93.25 MHz)",
+		"province": "เชียงใหม่"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_28",
+		"name": "เชียงใหม (FM 98 MHz)",
+		"province": "เชียงใหม"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_29",
+		"name": "ด่านซ้าย - เลย (FM 90.25 MHz)",
+		"province": "ด่านซ้าย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_30",
+		"name": "ตราด (FM 92.75 MHz)",
+		"province": "ตราด"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_31",
+		"name": "ตาก (AM 864 KHz)",
+		"province": "ตาก"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_32",
+		"name": "ตาก (FM 102 MHz)",
+		"province": "ตาก"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_33",
+		"name": "แม่สอด - ตาก (FM 103.75 MHz)",
+		"province": "แม่สอด"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_34",
+		"name": "ตรัง (FM 91.5 MHz)",
+		"province": "ตรัง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_35",
+		"name": "ตะกั่ว - พังงา (FM 90.25 MHz)",
+		"province": "ตะกั่ว"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_36",
+		"name": "ทุ่งสง - นครศรีธรรมราช (FM 97.00 MHz) ",
+		"province": "ทุ่งสง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_37",
+		"name": "นครสวรรค์ (FM 93.25 MHz)",
+		"province": "นครสวรรค์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_38",
+		"name": "นครสวรรค์ (สวศ. นครสวรรค์)",
+		"province": "นครสวรรค์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_39",
+		"name": "น่าน (FM 94.75 MHz) ",
+		"province": "น่าน"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_40",
+		"name": "นครพนม (FM 90.25 MHz)",
+		"province": "นครพนม"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_41",
+		"name": "นครราชสีมา (FM 105.25 MHz)",
+		"province": "นครราชสีมา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_42",
+		"name": "นครราชสีมา (AM 729 KHz)",
+		"province": "นครราชสีมา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_43",
+		"name": "นครศรีธรรมราช (FM 93.50 MHz)",
+		"province": "นครศรีธรรมราช"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_44",
+		"name": "นราธิวาส (FM 98.25 MHz)",
+		"province": "นราธิวาส"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_45",
+		"name": "บุรีรัมย์(FM 101.75 MHz)",
+		"province": "บุรีรัมย์(FM"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_46",
+		"name": "บึงกาฬ (FM 90.50 MHz)",
+		"province": "บึงกาฬ"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_47",
+		"name": "ยะลา-เบตง (FM 93 MHz)",
+		"province": "ยะลา-เบตง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_48",
+		"name": "ประจวบคีรีขันธ์ (FM 102.25 MHz)",
+		"province": "ประจวบคีรีขันธ์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_49",
+		"name": "ปัตตานี (FM 101 MHz)",
+		"province": "ปัตตานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_50",
+		"name": "เชียงใหม่-ฝาง (FM 89.25 MHz)",
+		"province": "เชียงใหม่-ฝาง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_51",
+		"name": "พังงา (FM 100 MHz)",
+		"province": "พังงา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_52",
+		"name": "พัทลุง (FM 98 MHz)",
+		"province": "พัทลุง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_53",
+		"name": "พิษณุโลก (FM 94.25 MHz)",
+		"province": "พิษณุโลก"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_54",
+		"name": "พะเยา (FM 95.25 MHz)",
+		"province": "พะเยา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_55",
+		"name": "เพชรบูรณ์ (FM 102.25 MHz)",
+		"province": "เพชรบูรณ์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_56",
+		"name": "เพชรบุรี (FM 95.75 MHz) ",
+		"province": "เพชรบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_57",
+		"name": "แพร่ (FM 91 MHz) ",
+		"province": "แพร่"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_58",
+		"name": "ภูเก็ต (AM 1062 KHz)",
+		"province": "ภูเก็ต"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_59",
+		"name": "ภูเก็ต (FM 90.50 MHz)",
+		"province": "ภูเก็ต"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_60",
+		"name": "ภูเก็ต (FM 96.75 MHz)",
+		"province": "ภูเก็ต"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_61",
+		"name": "มหาสารคาม (AM 531 KHz)",
+		"province": "มหาสารคาม"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_62",
+		"name": "มหาสารคาม (FM 106.5 MHz)",
+		"province": "มหาสารคาม"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_63",
+		"name": "มุกดาหาร (AM 549 MHz)",
+		"province": "มุกดาหาร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_64",
+		"name": "มุกดาหาร (FM 99.25 MHz)",
+		"province": "มุกดาหาร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_65",
+		"name": "แม่ฮ่องสอน (FM 104 MHz) ",
+		"province": "แม่ฮ่องสอน"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_66",
+		"name": "แม่ฮ่องสอน-แม่สะเรียง (FM 90.5 MHz)",
+		"province": "แม่ฮ่องสอน-แม่สะเรียง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_67",
+		"name": "ยโสธร (FM 90 MHz)",
+		"province": "ยโสธร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_68",
+		"name": "ยะลา (FM 92 MHz)",
+		"province": "ยะลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_69",
+		"name": "ยะลา (FM 94.25 MHz)",
+		"province": "ยะลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_70",
+		"name": "ยะลา (FM 95 MHz)",
+		"province": "ยะลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_71",
+		"name": "ราชบุรี (AM 1593 KHz)",
+		"province": "ราชบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_72",
+		"name": "ระยอง (FM 91.75 MHz)",
+		"province": "ระยอง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_73",
+		"name": "ระนอง (FM 107.25 MHz)",
+		"province": "ระนอง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_74",
+		"name": "ร้อยเอ็ด (FM 94.00 MHz)",
+		"province": "ร้อยเอ็ด"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_75",
+		"name": "ลำปาง (FM 97 MHz)",
+		"province": "ลำปาง"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_76",
+		"name": "ลำพูน (FM 95 MHz)",
+		"province": "ลำพูน"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_77",
+		"name": "เลย (FM 95.25 MHz)",
+		"province": "เลย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_78",
+		"name": "ศรีสะเกษ (FM 100.25 MHz)",
+		"province": "ศรีสะเกษ"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_79",
+		"name": "จันทบุรี-สวศ. (AM 927 KHz)",
+		"province": "จันทบุรี-สวศ."
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_80",
+		"name": "สระแก้ว (FM 103.25 MHz)",
+		"province": "สระแก้ว"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_81",
+		"name": "แม่ฮ่องสอน-สวศ. (FM 102 MHz)",
+		"province": "แม่ฮ่องสอน-สวศ."
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_82",
+		"name": "สกลนคร (FM 91.25 MHz)",
+		"province": "สกลนคร"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_83",
+		"name": "สงขลา (FM 89.50 MHz)",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_84",
+		"name": "สงขลา (FM 90.50 MHz)",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_85",
+		"name": "สงขลา (AM 558 KHz)",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_86",
+		"name": "สงขลา (AM 1404 KHz )",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_87",
+		"name": "สงขลา (FM 102.25 MHz)",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_88",
+		"name": "สงขลา (สวศ. สงขลา)",
+		"province": "สงขลา"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_89",
+		"name": "สตูล (FM 95.5 MHz)",
+		"province": "สตูล"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_90",
+		"name": "สตูล (FM 99.5 MHz)",
+		"province": "สตูล"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_91",
+		"name": "สุราษฎร์ธานี (FM 89.75 MHz)",
+		"province": "สุราษฎร์ธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_92",
+		"name": "สุราษฎร์ธานี (FM 90.00 MHz)",
+		"province": "สุราษฎร์ธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_93",
+		"name": "สุราษฎร์ธานี (FM 95.50 MHz)",
+		"province": "สุราษฎร์ธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_94",
+		"name": "สุราษฎร์ธานี-สมุย (FM 96.75 MHz)",
+		"province": "สุราษฎร์ธานี-สมุย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_95",
+		"name": "กาญจนบุรี-สังขละบุรี (FM 94.25 MHz)",
+		"province": "กาญจนบุรี-สังขละบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_96",
+		"name": "สุพรรณบุรี (FM 102.25 MHz)",
+		"province": "สุพรรณบุรี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_97",
+		"name": "สุโขทัย (FM 93.75 MHz) ",
+		"province": "สุโขทัย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_98",
+		"name": "สุรินทร์ (AM 909 MHz)",
+		"province": "สุรินทร์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_99",
+		"name": "สุรินทร์ (FM 93.5 MHz)",
+		"province": "สุรินทร์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_100",
+		"name": "สุรินทร์ (FM 97.5 MHz)",
+		"province": "สุรินทร์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_101",
+		"name": "สุไหงโกลก นราธิวาส (FM 106.5 MHz)",
+		"province": "สุไหงโกลก"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_102",
+		"name": "หนองคาย (AM 810 KHz)",
+		"province": "หนองคาย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_103",
+		"name": "หนองคาย (FM 90.5 MHz)",
+		"province": "หนองคาย"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_104",
+		"name": "หนองบัวลำภู (FM 97.25 MHz)",
+		"province": "หนองบัวลำภู"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_105",
+		"name": "อุตรดิตถ์ (FM อุตรดิตถ์ )",
+		"province": "อุตรดิตถ์"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_106",
+		"name": "อุดรธานี (FM 93.75 MHz)",
+		"province": "อุดรธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_107",
+		"name": "อุบลราชธานี (FM 98.5 MHz)",
+		"province": "อุบลราชธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_108",
+		"name": "อุบลราชธานี (สวศ. อุบลราชธานี)",
+		"province": "อุบลราชธานี"
+	},
+	{
+		"ng_url": "https://astrapa.nt-acs.net:8210/station_109",
+		"name": "อำนาจเจริญ (FM 103.25 MHz)",
+		"province": "อำนาจเจริญ"
+	},
+	{
+		"ng_url": ""
+	}
+]

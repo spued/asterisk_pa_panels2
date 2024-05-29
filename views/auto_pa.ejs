@@ -1,0 +1,377 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-12">
+          <div class="form-group justify-content-between">
+            <button class='btn btn-success float-right' id="btn_add_pa_plan" hidden> เพิ่มรายการ </button>
+          </div>
+          <label class="h3" for="select_location">
+            ตั้งเวลาประกาศในพื้นที่ชื่อ: <i class="badge badge-info" id="current_location_name"></i>
+            (<i class="badge badge-info" id="current_location_number"></i>)
+          </label>
+          <select class="form-control custom-select" id="select_location">
+            <option value="default">เลือกพื้นที่</option>
+          </select>
+        </div>
+        <div class="col-sm-12">
+          <table class="table" id="pa_plan_schedule_table">
+            <thead>
+              <tr>
+                <th>รายการ</th>
+                <th>ไฟล์</th>
+                <th>เวลา</th>
+                <th>แอคชั่น</th>
+              </tr>
+            </thead>
+            <tbody id="plan_list"></tbody>
+            <tfoot>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('./modals/modal_pa_schedule_plan_add.ejs'); %>
+<%- include('./modals/modal_pa_schedule_edit.ejs'); %>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  $(function() {
+    var current_location = {
+      name: 'default',
+      text: 'default',
+      _id: '000000000000'
+    };
+    var schedule_detail_list = null;
+    var main_schedule_table = null;
+
+    $.post("/file_list", function(res) {
+      //console.log(res);
+      file_detail_list = res;
+      $.each(res, function(i, item) {
+        $('.select_file').append($('<option>', {
+          value: item.name,
+          text: item.originalname,
+          mimetype: item.img.contentType,
+          file_id: item._id
+        }));
+        $('.select_file').select2({});
+      });
+
+    }).then(function() {
+
+    })
+
+    $.post("/location_list_id", {
+      from: 'auto_pa'
+    }, function(res) {
+      //console.log(res);
+      $('#select_location').select2({});
+      $.each(res, function(i, item) {
+        //console.log(item);
+        $('#select_location').append($('<option>', {
+          value: item.name,
+          text: item.name,
+          number: item.number,
+          _id: item._id
+        }));
+        $('#select_location').select2({});
+      });
+    }).then(function() {
+      if (sessionStorage.location_id != undefined) {
+        $('#select_location').val(sessionStorage.location_name).trigger('change');
+      }
+    })
+
+    $.post("/pa_plan_list", {
+      _id: 0
+    }, function(res) {
+      //console.log(res.data);
+      schedule_detail_list = res.data;
+      $.each(res.data, function(i, item) {
+        $('.select_pa_plan').append($('<option>', {
+          value: item.name,
+          text: item.name,
+          schedule_id: item._id
+        }));
+      });
+    }).then(function() {
+      $('.select_pa_plan').select2({});
+    })
+
+    main_schedule_table = $('#pa_plan_schedule_table').DataTable({
+      ajax: {
+        url: '/auto_pa_list',
+        type: 'POST',
+        data: function(_data) {
+          _data._id = current_location._id;
+          return JSON.stringify(_data);
+        },
+        contentType: 'application/json'
+      },
+      processing: true,
+      serverSide: false,
+      columnDefs: [{}],
+      order: [
+        [0, "desc"]
+      ],
+      language: {
+        emptyTable: "ยังไม่มีข้อมูลการตั้งเวลา โปรดเลือกพื้นที่"
+      },
+      columns: [{
+          data: 'name'
+        },
+        {
+          data: 'file_id',
+          render: function(data) {
+            let html = '';
+            let _file = file_detail_list.find(element => element._id == data);
+            //console.log(_file);
+            if (_file) html = _file.originalname;
+            else html = '-';
+            return html;
+          }
+        },
+        {
+          data: {},
+          render: function(data) {
+            let html = '';
+            let _date = JSON.parse(data.play_time);
+            //console.log(_file);
+            html = _date.hour;
+            return html;
+          }
+        },
+        {
+          data: {},
+          render: function(_d) {
+            //console.log(_d);
+            return '<button id="' + _d._id + '" class="btn btn-danger btn-delete-plan">ลบ</button>' +
+              '<button id="' + _d._id + '" class="btn btn-warning btn-edit-plan">แก้ไข</button>';
+          }
+        }
+      ],
+      createdRow: function(row, data, dataIndex) {
+        $(row).attr('data_row_id', data._id);
+      },
+      initComplete: function(settings, json) {
+
+      }
+    });
+    $('#select_location').on('change', function(event) {
+      //console.log($(this).val() +  $(this).find('option:selected').attr('_id'));
+      current_location.name = $(this).val();
+      current_location.text = $(this).val();
+      current_location._id = $(this).find('option:selected').attr('_id');
+      current_location.number = $(this).find('option:selected').attr('number')
+      sessionStorage.location_id = current_location._id;
+      sessionStorage.location_name = current_location.name;
+      main_schedule_table.ajax.reload();
+
+      //console.log(current_location);
+      if ($(this).val() != 'default') {
+        $.post("/auto_pa_list", function(res) {
+          //console.log(res);
+        })
+        $.post('/location_id', {
+          _id: current_location._id
+        }, function(_res) {
+          //console.log(_res);
+          $('#current_location_name').text(_res.data.name);
+          $('#current_location_number').text(_res.data.number);
+        })
+        $('#btn_add_pa_plan').prop('hidden', false);
+      } else {
+        $('#btn_add_pa_plan').prop('hidden', true);
+        $('#current_location_name').text("-");
+        $('#current_number').text("-");
+        $('#current_location_name').text("-");
+        $('#current_location_number').text("-");
+      }
+
+    });
+    $('#btn_add_pa_plan_data').on('click', function(evt) {
+      // Add schedule to location
+      var modal = $('#modal_add_pa_schedule_plan');
+
+      function validateTime(time) {
+        const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+        return time.match(timeReg)
+      }
+      let _hour = $('#pa_plan_hour').val();
+      _hour = _hour.replace('.', ':');
+
+      if (modal.find('#select_pa_plan').val() != 'default') {
+        //console.log('Add plan to schedule');
+        //console.log(current_location);
+
+        let _pa_plan = {
+          plan_type: $('#pa_plan_type').val(),
+          plan_priority: $('#pa_plan_priority').val(),
+          plan_name: $('#select_pa_plan').val(),
+          plan_id: $('#select_pa_plan').find('option:selected').attr('schedule_id'),
+          play_duration: $('#pa_plan_duration').val(),
+          play_time: function() {
+            let _date = JSON.parse($('#pa_plan_play_time_add').val());
+            _date.hour = _hour;
+            return JSON.stringify(_date);
+          },
+          file_id: $('#select_file').find('option:selected').attr('file_id'),
+          file_name: $('#select_file').val(),
+          location_id: current_location._id,
+          location_number: current_location.number,
+        }
+
+        $.post("/auto_pa_save", _pa_plan, function(res) {})
+        modal.modal('hide');
+        setTimeout(function() {
+          main_schedule_table.ajax.reload();
+        }, 1000);
+
+      } else {
+        alert("โปรดเลือกเทมเพลต");
+      }
+
+    });
+
+    $('#btn_add_pa_plan').on('click', function(evt) {
+      // Add schedule to location
+      var modal = $('#modal_add_pa_schedule_plan');
+      let location_id = current_location._id;
+
+      //console.log('check count for location id = ' + location_id);
+      $.post('/auto_pa_count', {
+        _id: location_id
+      }, function(res) {
+        //console.log(res);
+        if (res.count >= 15) {
+          alert("เพิ่มจำนวนได้สูงสุดที่ 15 ข้อมูล");
+          return 0;
+        } else {
+          modal.find('#select_pa_plan').val('default').trigger('change');
+          modal.modal();
+        }
+      })
+    });
+
+    $('#btn_edit_pa_plan_data').on('click', function(evt) {
+      // edit schedule to location
+      var modal = $('#modal_edit_pa_schedule_plan');
+
+      function validateTime(time) {
+        const timeReg = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/
+        return time.match(timeReg)
+      }
+      let _hour = $('#e_pa_plan_hour').val();
+      _hour = _hour.replace('.', ':');
+      if (!validateTime(_hour)) {
+        alert("เวลาไม่ถูกต้อง");
+        return 0;
+      };
+      let _date = {
+        hour: _hour,
+        day: $('#e_pa_plan_day').val(),
+        date: $('#e_pa_plan_date').val(),
+        month: $('#e_pa_plan_month').val()
+      }
+      const _post_data = {
+        _time: JSON.stringify(_date),
+        _duration: $('#e_pa_plan_duration').val(),
+        _id: $('#e_pa_plan_id').val()
+      }
+
+      $.post('/auto_pa_edit', _post_data, function(res) {
+        modal.modal('hide');
+        setTimeout(function() {
+          main_schedule_table.ajax.reload();
+        }, 500);
+      })
+    });
+
+    $('#select_pa_plan').on('change', function(event) {
+      //console.log($(this).val() +  $(this).find('option:selected').attr('schedule_id'));
+      if ($(this).val() != 'default') {
+        let plan_id = $(this).find('option:selected').attr('schedule_id');
+        var modal = $('#modal_add_pa_schedule_plan');
+        $.post('/pa_plan_id', {
+          _id: plan_id
+        }, function(res) {
+          console.log(res);
+          var _date = JSON.parse(res.play_time);
+          if (res.file_lock == '1') {
+            //console.log("File lock.");
+            modal.find('#pa_plan_duration').prop('disabled', true);
+            modal.find('#select_file').prop('disabled', true);
+
+          } else {
+            //console.log("File not lock.");
+            modal.find('#pa_plan_duration').prop('disabled', false);
+            modal.find('#select_file').prop('disabled', false);
+
+          }
+          modal.find('#pa_plan_duration').val(res.play_duration);
+          modal.find('#pa_plan_hour').val(_date.hour);
+          modal.find('#pa_plan_play_time').val(res.play_time);
+          modal.find('#pa_plan_play_time_add').val(res.play_time);
+          modal.find('#select_file').val(res.filename).trigger('change');
+          modal.find('#pa_plan_type').val(res.type);
+          modal.find('#pa_plan_priority').val(res.priority);
+        })
+      }
+
+    })
+
+    $(document).on('click', '.btn-delete-plan', function(event) {
+      //console.log($(this).attr('id'));
+      if (confirm('ต้องการลบรายการนี้?') == true) {
+        $.post('/auto_pa_delete', {
+          location_id: current_location._id,
+          _id: $(this).attr('id')
+        }, function(res) {
+          setTimeout(function() {
+            main_schedule_table.ajax.reload();
+          }, 500);
+        })
+      } else {
+
+      }
+    })
+
+    $(document).on('click', '.btn-edit-plan', function(evt) {
+      // Add schedule to location
+      var modal = $('#modal_edit_pa_schedule_plan');
+      modal.modal();
+      $.post('/auto_pa_id', {
+        location_id: current_location._id,
+        _id: $(this).attr('id')
+      }, function(res) {
+        let _date = JSON.parse(res.data.play_time);
+        //console.log(res);
+        modal.find('#e_select_file').val(res.data.filename).trigger('change');
+        modal.find('#e_select_pa_plan').val(res.data.name);
+        modal.find('#e_pa_plan_type').val(res.data.type);
+        modal.find('#e_pa_plan_hour').val(_date.hour);
+        modal.find('#e_pa_plan_day').val(_date.day);
+        modal.find('#e_pa_plan_date').val(_date.date);
+        modal.find('#e_pa_plan_month').val(_date.month);
+        modal.find('#e_pa_plan_duration').val(res.data.play_duration);
+        modal.find('#e_pa_plan_id').val(res.data._id);
+      })
+    });
+  })
+</script>
+
+<%- include('footer.ejs'); %>

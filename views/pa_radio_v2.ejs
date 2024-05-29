@@ -1,0 +1,113 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-8">
+          <input type="hidden" id="page_user_id" value="<%- user._id -%>" />
+          <input type="hidden" id="page_user_bernum" value="<%- user.sip_account -%>" />
+          <input type="hidden" id="page_user_ssap" value="<%- user.sip_password -%>" />
+          <input type="hidden" id="page_location_id" value="" />
+          <input type="hidden" id="location_number" value="" />
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="h5" for="select_location">พื้นที่ประกาศ: </label>
+              หมายเลข: <i class="badge badge-info" id="current_number"></i>
+            </div>
+            <div class="col-sm-10">
+              <select class="form-control custom-select" id="select_location">
+                <option value="default">เลือกพื้นที่</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="led-box">
+            <div id="led_on_air" class="led-off"></div>
+            <div class="h6">On Air</div>
+          </div>
+          <div class="led-box">
+            <div id="led_playing" class="led-off"></div>
+            <div class="h6">Radio</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group float-right">
+            <button class="btn btn-info" id="btn_main_on">เปิดระบบ</button>
+            <button class="btn btn-success" id="btn_main_call">เริ่มประกาศ</button>
+            <button class="btn btn-danger" id="btn_main_disconnect">หยุดประกาศ</button>
+            <button class="btn btn-warning" id="btn_main_off">ปิดระบบ</button>
+            <button class="btn btn-info" id="mic_control">
+              <i class="fa fa-microphone" id="mic_icon"></i>
+            </button>
+          </div>
+          <div class="form-group float-left">
+            <button class="btn btn-success" id="btn_volume_down">ลดเสียง</button>
+            <label class="text text-default h6" id="volume_level">0</label>
+            <button class="btn btn-warning" id="btn_volume_up">เพิ่มเสียง</button>
+
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="row">
+            <div class="col-sm-12">
+              <audio id="main_audio" preload="auto" type="audio/wav">Audio control</audio>
+              <audio controls id="aux_audio" type="audio/mpeg" crossorigin="anonymous" src="">Aux</audio>
+            </div>
+            <div class="col-sm-12 mt-2">
+              <select class="form-control select" id="station_select">
+                <option value="-1">เลือกสถานีวิทยุ</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 mb-2 mt-2">
+          <div class="card bg-dark">
+            <div class="card-title ml-2">
+              <label class="h5 text-warning">บันทึกข้อความ</label>
+              <button class="btn btn-info mt-2 btn-save-message" id="btn_save_message">เซฟ</button>
+            </div>
+            <div class="card-body"><textarea class="form-control" rows="7" style="width:100%;" id="user_note"></textarea></div>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <label class="h5 rounded">
+            สถานะการทำงานของอุปกรณ์</label>
+        </div>
+        <div class="col-sm-12">
+          <div id="extension_dot_list"></div>
+        </div>
+        <div class="station_list col-sm-12 mb-2 mt-2">
+          <table class="table" data-mode="" id="radio_station_table">
+            <thead>
+              <tr></tr>
+              <td><strong>รายการสถานีวิทยุจากกรมประชาสัมพันธ์ Click for select station</strong></td>
+              <td></td>
+              </tr>
+            </thead>
+            <tbody id="station_list">
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('scripts.ejs'); %>
+<script src="/public/js/jssip-3.9.1.js"></script>
+<script src="/public/js/sipclient_radio.js"></script>
+<script src="/public/js/select2.min.js"></script>
+<script type="text/javascript" src="/public/js/pa_radio_v2.js"></script>
+<%- include('footer.ejs'); %>

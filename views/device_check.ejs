@@ -1,0 +1,143 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <div class="card">
+        <div class="card-title">
+          <h3> อุปกรณ์ในระบบ - <%= user.message %></h3>
+        </div>
+        <div class="card-body">
+          <div class="row mb-4 h3">
+            <div id="over_all_monitor"></div>
+          </div>
+          <table class="table device-table" id="device_table">
+            <thead>
+              <tr>
+                <th>หมายเลข</th>
+                <th>อุปกรณ์</th>
+                <th>ชื่อ</th>
+                <th>สถานะ</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div id="device_list"></div>
+            </tbody>
+            <tfoot>
+
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  var device_table = $('#device_table').DataTable({
+    ajax: {
+      url: '/device_list_prefix',
+      type: 'POST',
+      data: function(_data) {
+        _data._id = 0;
+        _data.prefix = '<%= user.prefix %>';
+        return JSON.stringify(_data);
+      },
+      contentType: 'application/json'
+    },
+    processing: true,
+    serverSide: false,
+    columnDefs: [{
+        orderable: false,
+        targets: 1
+      },
+      {
+        orderable: false,
+        targets: 2
+      }
+    ],
+    order: [
+      [0, "asc"]
+    ],
+    language: {
+      emptyTable: "ยังไม่มีข้อมูล"
+    },
+    columns: [{
+        data: 'number'
+      },
+      {
+        data: {},
+        render: function(_d) {
+          //console.log(_d);
+          let html = '';
+          if (_d.device_location.length > 0) {
+            switch (_d.device_location[0].device_type) {
+              case "output":
+                html += '<i class="nav-icon fas fa-bullhorn"></i>ลำโพง';
+                break;
+              case "input":
+                html += '<i class="nav-icon fas fa-microphone"></i>ไมโครโฟน';
+                break;
+              default:
+                html += '<i class="nav-icon fas fa-bullhorn"></i>ไม่มีข้อมูล';
+                break;
+            }
+          } else {
+            html += '</td><td><i class="nav-icon fas fa-window-close"></i>ไม่มีข้อมูล';
+          }
+          return html;
+        }
+      },
+      {
+        data: {},
+        render: function(_d) {
+          //console.log(_d);
+          if (_d.device_location.length > 0) return _d.device_location[0].name;
+          else return '-';
+        }
+      },
+      {
+        data: 'state',
+        render: function(_d) {
+          let html = '-';
+          switch (_d) {
+            case "0":
+              html = '<i class="nav-icon fas fa-window-close text-danger"></i>ไม่พร้อมใช้งาน';
+              break;
+            case "1":
+              html = '<i class="nav-icon fas fa-bullhorn text-success"></i>พร้อมใช้งาน';
+              break;
+            case "2":
+              html = '<i class="nav-icon fas fa-volume-up text-warning"></i>ใช้งานอยู่';
+              break;
+            default:
+              html = '<i class="nav-icon fas fa-window-close text-warning"></i>หมายเลขไม่มี';
+              break;
+          }
+          return html;
+        }
+      }
+    ],
+    createdRow: function(row, data, dataIndex) {
+      $(row).attr('data_row_id', data._id);
+    },
+    initComplete: function(settings, json) {}
+  })
+  $(function() {
+    // refresh every 15 seconds. 
+    setInterval(function() {
+      device_table.ajax.reload();
+    }, 15000);
+  })
+</script>
+
+<%- include('footer.ejs'); %>

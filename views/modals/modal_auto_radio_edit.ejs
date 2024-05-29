@@ -1,0 +1,109 @@
+<div class="modal fade" id="modal_edit_auto_radio">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Auto radio edit</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-12">
+
+            <label class="h5" for="e_location_name">Location: </label>
+            <label class="h5 text-success" id="e_location_name">-</label>
+            <label class="h5" for="e_location_number">Number: </label>
+            <label class="h5 text-success" id="e_location_number">-</label>
+          </div>
+          <div class="col-sm-12 mt-2">
+            <select class="form-control select" id="e_select_station">
+            </select>
+            <input type="hidden" id="e_uuid" name="_uuid" value="" />
+            <input type="hidden" id="e_station_name" name="station_name" value="" />
+            <input type="hidden" id="e_station_url" name="station_url" value="" />
+          </div>
+          <div class="col-sm-12 mt-2">
+            <div class="in-line">
+              <div class="e_weekDays-selector">
+                <label>Weekly: </label>
+                <input type="checkbox" id="e_weekday-mon" class="e_weekday" value="mon" unchecked />
+                <label for="e_weekday-mon">Mon</label>
+                <input type="checkbox" id="e_weekday-tue" class="e_weekday" value="tue" unchecked />
+                <label for="e_weekday-tue">Tue</label>
+                <input type="checkbox" id="e_weekday-wed" class="e_weekday" value="wed" unchecked />
+                <label for="e_weekday-wed">Wed</label>
+                <input type="checkbox" id="e_weekday-thu" class="e_weekday" value="thu" unchecked />
+                <label for="e_weekday-thu">Thu</label>
+                <input type="checkbox" id="e_weekday-fri" class="e_weekday" value="fri" unchecked />
+                <label for="e_weekday-fri">Fri</label>
+                <input type="checkbox" id="e_weekday-sat" class="e_weekday" value="sat" unchecked />
+                <label for="e_weekday-sat">Sat</label>
+                <input type="checkbox" id="e_weekday-sun" class="e_weekday" value="sun" unchecked />
+                <label for="e_weekday-sun">Sun</label>
+              </div>
+            </div>
+            <div class="in-line">
+              <label class="input-group-addon">Start: </label>
+              <select id="e_select_start_time" type="text" class="form-control select-time" name="start_time">
+                <option value="00">00</option>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11" selected>11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+              </select>:
+              <select id="e_select_start_minute" type="text" class="form-control select-time" name="start_minute">
+                <option value="00" selected>00</option>
+                <option value="05">05</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="40">40</option>
+                <option value="45">45</option>
+                <option value="50">50</option>
+                <option value="55">55</option>
+              </select>
+              <label>Length: </label>
+              <select class="form-control select-time-length" id="e_select_time_length">
+                <option value="30">1/2 minute</option>
+                <option value="60">1 minute</option>
+                <option value="180">3 minutes</option>
+                <option value="300">5 minutes</option>
+                <option value="1800" selected>30 minutes</option>
+                <option value="3600">1 hour</option>
+                <option value="7200">2 hour</option>
+                <option value="14400">4 hour</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" for="form_edit_auto_radio" class="btn btn-primary btn-edit-auto-radio" id="btn_edit_auto_radio_save">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

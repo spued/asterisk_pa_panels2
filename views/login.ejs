@@ -1,0 +1,62 @@
+<%- include('layout.ejs'); %>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card bg-gradient-default">
+        <div class="card-header">
+          <a href="/" class="brand-link">
+            <img src="public/img/mylogo.png" alt="site Logo" class="brand-image img-circle elevation-2" style="opacity: .8">
+            <label>
+              <span class="text-success font-weight-light"><i class="h3">EasyPA cloud</i></span>
+            </label>
+          </a>
+        </div>
+        <div class="card-body">
+          <span class="brand-text font-weight-light">เข้าใช้งาน</span>
+          <p style="color: red;"><%= locals.error || '' %></p>
+          <form class="form" method="post" action="/login">
+            <div class="form-group">
+              <label for="email" class="cols-sm-2 control-label">Login:</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <input type="text" class="form-control" name="email" id="email" />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="password" class="cols-sm-2 control-label">Password:</label>
+              <div class="cols-sm-10">
+                <div class="input-group">
+
+                  <input type="password" class="form-control" name="password" id="password" />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group ">
+              <button type="submit" class="btn btn-success btn-lg btn-block login-button">Login</button>
+            </div>
+            <div class="login-register">
+              <a href="/register" class="btn btn-warning">กดตรงนี้ เพื่อลงทะเบียนขอเข้าใช้งาน</a>
+            </div>
+          </form>
+        </div>
+        <div class="card-footer">
+          <script type="text/javascript">
+            var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+            document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script language="JavaScript" type="text/javascript">
+            TrustLogo("https://www.positivessl.com/images/seals/positivessl_trust_seal_lg_222x54.png", "POSDV", "none");
+          </script>
+          <a href="#" class="nav-link">Public Announcement Version.2.0.3 &copy; 2022-2023 EasyPA systems.</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div> <!-- wrapper-->
+</body>
+
+</html>

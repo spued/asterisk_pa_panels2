@@ -1,0 +1,124 @@
+<div class="modal fade" id="modal_add_pa_plan">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">เพิ่มแผน</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/add_pa_plan" id="form_add_pa_plan">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="pa_plan_name">ชื่อ</label>
+                <input type="text" class="form-control" id="pa_plan_name" name="pa_plan_name" placeholder="ตั้งชื่อ" />
+              </div>
+            </div>
+            <div class="col-md-12">
+              เลือกชนิด
+              <select class="form-control select" id="select_type" name="select_type">
+                <option value="daily">รายวัน</option>
+                <option value="weekly">รายสัปดาห์</option>
+                <option value="monthly">รายเดือน</option>
+                <option value="special">พิเศษ</option>
+              </select>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="pa_plan_hour">เวลา</label>
+                    <input type="text" class="form-control" id="pa_plan_hour" name="pa_plan_hour" value="00:00" placeholder="00:00" />
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="pa_plan_weekday">วัน</label>
+                    <select type="text" class="form-control" id="pa_plan_weekday" name="pa_plan_weekday">
+                      <option value="mon">จันทร์</option>
+                      <option value="tue">อังคาร</option>
+                      <option value="wed">พุธ</option>
+                      <option value="thu">พฤหัสบดี</option>
+                      <option value="fri">ศุกร์</option>
+                      <option value="sat">เสาร์</option>
+                      <option value="sun">อาทิตย์</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="pa_plan_date">วันที่</label>
+                    <select type="text" class="form-control" id="pa_plan_date" name="pa_plan_date">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                      <option value="6">6</option>
+                      <option value="7">7</option>
+                      <option value="8">8</option>
+                      <option value="9">9</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      <option value="13">13</option>
+                      <option value="14">14</option>
+                      <option value="15">15</option>
+                      <option value="16">16</option>
+                      <option value="17">17</option>
+                      <option value="18">18</option>
+                      <option value="19">19</option>
+                      <option value="20">20</option>
+                      <option value="21">21</option>
+                      <option value="22">22</option>
+                      <option value="23">23</option>
+                      <option value="24">24</option>
+                      <option value="25">25</option>
+                      <option value="26">26</option>
+                      <option value="27">27</option>
+                      <option value="28">28</option>
+                      <option value="29">29</option>
+                      <option value="30">30</option>
+                      <option value="31">31</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="pa_plan_month">เดือน</label>
+                    <select type="text" class="form-control" id="pa_plan_month" name="pa_plan_month">
+                      <option value="jan">มกราคม</option>
+                      <option value="feb">กุมภาพันธ์</option>
+                      <option value="mar">มีนาคม</option>
+                      <option value="apr">เมษายน</option>
+                      <option value="may">พฤษภาคม</option>
+                      <option value="jun">มิถุนายน</option>
+                      <option value="jul">กรกฎาคม</option>
+                      <option value="aug">สิงหาคม</option>
+                      <option value="sep">กันยายน</option>
+                      <option value="oct">ตุลาคม</option>
+                      <option value="nov">พฤษจิกายน</option>
+                      <option value="dec">ธันวาคม</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              เลือกไฟล์
+              <select class="form-control select select_file" id="select_file" name="select_file">
+                <option value="-">-</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <button type="button" for="form_add_pa_plan" class="btn btn-primary btn-add-plan-data" id="btn_add_plan_data">เพิ่ม</button>
+      </div>
+    </div>
+  </div>
+</div>

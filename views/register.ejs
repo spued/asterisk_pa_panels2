@@ -1,0 +1,97 @@
+ 
+<%- include('layout.ejs'); %>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2>ลงทะเบียนเป็นผู้ใช้งาน</h2>
+            <div class="card">
+                <div class="card-header">กรอกข้อมูลเพื่อลงทะเบียน</div>
+                <div class="card-body">
+                    <form class="form-horizontal" method="post" name="register_form" action="/register" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label for="name" class="cols-sm-2 control-label">ชื่อ นามสกุล</label>
+                            <div class="cols-sm-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon mr-4"><i class="fa fa-user fa-2x" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="name" id="name" placeholder="Enter your Name" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="cols-sm-2 control-label">อีเมล์</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon mr-4"><i class="fa fa-envelope fa-2x" aria-hidden="true"></i></span>
+                                    <input type="text" class="form-control" name="email" id="email" placeholder="Enter your Email" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="cols-sm-2 control-label">กำหนดรหัสผ่าน</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon mr-4"><i class="fa fa-lock fa-2x" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Enter your Password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm" class="cols-sm-2 control-label">ตรวจสอบรหัสผ่าน</label>
+                            <div class="cols-sm-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon mr-4"><i class="fa fa-lock fa-2x" aria-hidden="true"></i></span>
+                                    <input type="password" class="form-control" name="confirm" id="confirm" placeholder="Confirm your Password" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group ">
+                            <button type="submit" class="btn btn-success btn-lg btn-block login-button">เริ่มลงทะเบียน</button>
+                        </div>
+                        <div class="login-register">
+                            <a href="/login">กลับหน้าล็อกอิน</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+function validateForm() {
+    let validate_list = [];
+    let check_empty = 0;
+    validate_list.push(document.forms["register_form"]["name"].value);
+    validate_list.push(document.forms["register_form"]["email"].value);
+    validate_list.push(document.forms["register_form"]["password"].value);
+    validate_list.push(document.forms["register_form"]["confirm"].value);
+    validate_list.forEach( function(value){
+        if(value == "") {
+            check_empty = 1;
+        }
+    });
+    if(check_empty) {
+        alert("ต้องใส่ข้อมูลให้ครบ");
+        return false;
+    }
+    let _email = document.forms["register_form"]["email"].value;
+    if(!ValidateEmail(_email)){
+        alert("โปรดใส่อีเมล์ให้ถูกต้อง");
+        return false;
+    }
+    if (!(document.forms["register_form"]["password"].value === document.forms["register_form"]["confirm"].value)) {
+        alert("รหัสผ่านไม่ตรงกัน");
+        return false;
+    } 
+  }
+  function ValidateEmail(input) {
+    var validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (input.match(validRegex)) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+</script>
+</html>

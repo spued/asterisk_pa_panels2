@@ -1,0 +1,39 @@
+<div class="modal fade" id="modal_edit_device">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">แก้ไขอุปกรณ์</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="form_edit_device">
+          <div class="form-group">
+            <label for="number">หมายเลข</label>
+            <input type="text" class="form-control" id="e_number" placeholder="ใส่หมายเลข">
+            <input type="hidden" class="form-control" id="e_id" value="" />
+          </div>
+          <div class="form-group">
+            <label for="sn">หมายเลขซีเรียล</label>
+            <input type="text" class="form-control" id="e_sn" placeholder="ใส่หมายเลขเครื่อง" value="-">
+          </div>
+          <div class="form-group">
+            <label for="name">ชื่อ</label>
+            <input type="text" class="form-control" id="e_name" placeholder="ชื่อหรือคำอธิบาย" value="-">
+          </div>
+          <label for="select_type">ชนิด</label>
+          <select class="form-control custom-select" id="e_select_type">
+            <option value="output">ลำโพง</option>
+            <option value="input">ไมโครโฟน</option>
+            <option value="others">อื่นๆ</option>
+          </select>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">ปิด</button>
+        <button type="button" for="form_edit_device" class="btn btn-primary btn-save-device-data">เซฟ</button>
+      </div>
+    </div>
+  </div>
+</div>

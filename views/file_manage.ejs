@@ -1,0 +1,144 @@
+<%- include('layout.ejs'); %>
+<%- include('navbar.ejs'); %>
+<%- include('sidebar.ejs'); %>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <div class="content-header">
+    <div class="container-fluid">
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content-header -->
+  <!-- Main content -->
+  <div class="content">
+    <div class="container-fluid">
+      <h3> บริหารจัดการไฟล์เสียง </h3>
+      <form action="/file_manage" enctype="multipart/form-data" method="POST">
+        <div class="row mb-2">
+          <div class="col-sm-8">
+            <input class="form-control file" id="voicefile" type="file" name="voicefile" accept="audio/*">
+          </div>
+          <div class="col-sm-4">
+            <input type="submit" class="form-control btn btn-info btn-upload btn-float-right" style="width:100px;" value="Upload"></input>
+          </div>
+        </div>
+      </form>
+      <table class="table file-table" id="file_upload_table">
+        <thead>
+          <tr>
+            <th>ชื่อไฟล์</th>
+            <th>ขนาด</th>
+            <th>แอคชั่น</th>
+          </tr>
+        </thead>
+        <tbody>
+          <div id="file_list"> <%- table_content -%> </div>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+      <input type="hidden" id="user_info" name="current_user_info" value="<%= user._id %>">
+      <% if(user.type == "admin"){ %>
+      <input type="button" class="form-control btn btn-info btn-api-test" id="btn_api_test" style="width:100px;" value="API Test"></input>
+      <input type="button" class="form-control btn btn-info btn-api-test_key" id="btn_api_test_key" style="width:100px;" value="API Test key"></input>
+      <input type="button" class="form-control btn btn-info btn-update-files" id="btn_update_files" style="width:100px;" value="Update file"></input>
+      <% } %>
+    </div><!-- /.container-fluid -->
+  </div><!-- /.content -->
+</div>
+<%- include('modals/modal_api_test.ejs'); %>
+<%- include('modals/modal_api_test_key.ejs'); %>
+<%- include('scripts.ejs'); %>
+<script type="text/javascript">
+  $(function() {
+    $.post("/file_list", function(res) {
+      //console.log(res);
+      if (res.length >= 30) {
+        $('.btn-upload').prop('disabled', true);
+      } else {
+        $('.btn-upload').prop('disabled', false);
+      }
+    });
+    $(".btn-delete-file").on('click', function(evt) {
+      //console.log(evt);
+      let _post_data = {
+        id: $(this).attr('id'),
+        name: $(this).attr('fname')
+      };
+      if (confirm("ต้องการลบไฟล์?") == true) {
+        $.post('/file_delete', _post_data, function(res) {
+          //console.log(res);
+          if (res.code == 0) {
+            location.reload();
+          } else {
+            alert("เกิดความผิดพลาด: " + res.message);
+          }
+        })
+      }
+    })
+    $("#btn_update_files").on('click', function(evt) {
+      let _post_data = {
+        id: 0,
+        name: 'update'
+      };
+      $.post('/file_update', _post_data, function(res) {
+        //console.log(res);
+        if (res.code == 0) {
+          alert('อัพเดทไฟล์แล้ว');
+        } else {
+          alert("เกิดความผิดพลาด: " + res.message);
+        }
+      })
+    })
+    $("#btn_api_test").on('click', function(evt) {
+      let modal = $('#modal_api_test');
+      modal.modal('show');
+    })
+
+    $("#btn_send_api_test").on('click', function(evt) {
+      let modal = $('#modal_api_test');
+      let _post_data = {
+        filename: $('#t_filename').val(),
+        user_id: $('#user_info').val(),
+        location: $('#t_location').val(),
+        duration: $('#t_duration').val()
+      };
+      $.post('/api_play', _post_data, function(res) {
+        //console.log(res);
+        if (res.code == 0) {
+          //alert('play file' + $('#t_filename').val());
+        } else {
+          //alert("Error: " + res.message);
+        }
+        modal.modal('hide');
+      })
+    })
+
+    $("#btn_api_test_key").on('click', function(evt) {
+      let modal = $('#modal_api_test_key');
+      modal.modal('show');
+    })
+
+    $("#btn_send_api_test_key").on('click', function(evt) {
+      let modal = $('#modal_api_test_key');
+      let _post_data = {
+        filename: $('#tk_filename').val(),
+        api_key: $('#tk_api_key').val(),
+        user_id: $('#user_info').val(),
+        location: $('#tk_location').val(),
+        duration: $('#tk_duration').val()
+      };
+      $.post('/api_player', _post_data, function(res) {
+        //console.log(res);
+        if (res.code == 0) {
+          //alert('play file' + $('#t_filename').val());
+        } else {
+          //alert("Error: " + res.message);
+        }
+        modal.modal('hide');
+      })
+    })
+  })
+</script>
+
+<%- include('footer.ejs'); %>

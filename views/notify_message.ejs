@@ -1,0 +1,26 @@
+ <%- include('layout.ejs'); %>
+ <div class="container">
+   <div class="row justify-content-center">
+     <div class="col-md-8">
+       <div class="card">
+         <div class="card-header">
+           <h2><label class="control-label"><%= message_header %></label></h2>
+         </div>
+         <div class="card-body">
+           <h2><label class="control-label"><%= message_body %></label></h2>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+ </body>
+ <%- include('scripts.ejs'); %>
+ <script type="text/javascript">
+   $(function() {
+     setTimeout(function() {
+       window.location.href = '/login'
+     }, 4000);
+   })
+ </script>
+
+ </html>

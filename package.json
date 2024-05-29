@@ -1,0 +1,52 @@
+{
+  "name": "pa_panels",
+  "version": "1.0.0",
+  "description": "Control Panels for PA systems ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "keywords": [
+    "pa-panels"
+  ],
+  "author": "Sunya J.",
+  "license": "ISC",
+  "dependencies": {
+    "admin-lte": "^3.1.0",
+    "asterisk-manager": "^0.2.0",
+    "axios": "^1.6.8",
+    "bcryptjs": "^2.4.3",
+    "boostrap": "^2.0.0",
+    "browserify": "^17.0.0",
+    "console-stamp": "^3.1.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.2",
+    "express-session": "^1.17.2",
+    "express-winston": "^4.2.0",
+    "gulp": "^4.0.2",
+    "gulp-nodemon": "^2.5.0",
+    "jssip": "^3.9.0",
+    "jssip-node-websocket": "^3.0.0",
+    "mongoose": "^6.1.2",
+    "multer": "^1.4.4",
+    "music-metadata": "^7.12.3",
+    "node-cron": "^3.0.0",
+    "node-wav": "0.0.2",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "rrdtool": "^0.1.1",
+    "select2": "^4.1.0-rc.0",
+    "session-file-store": "^1.5.0",
+    "sip": "0.0.6",
+    "tempusdominus-core": "^5.19.0",
+    "uuid": "^8.3.2",
+    "uuidv1": "^1.6.14",
+    "vinyl-source-stream": "^2.0.0",
+    "watchify": "^4.0.0",
+    "winston": "^3.4.0",
+    "wrtc": "^0.4.7"
+  }
+}

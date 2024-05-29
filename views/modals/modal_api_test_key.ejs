@@ -1,0 +1,32 @@
+<div class="modal fade" id="modal_api_test_key">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">API Test by KEY</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="POST" action="/api_play" id="form_api_play">
+          <div class="form-group">
+            <label class="text-addon" for="location_name">Key</label>
+            <input type="text" class="form-control" id="tk_api_key" name="api_key" placeholder="Enter location number" value="88888888" />
+            <label class="text-addon" for="location_name">Location</label>
+            <input type="text" class="form-control" id="tk_location" name="location" placeholder="Enter location number" value="1005" />
+            <label for="filename">File</label>
+            <input type="text" class="form-control" id="tk_filename" name="filename" placeholder="Enter file name" value="voicefile-1644292736433" />
+          </div>
+          <div class="form-group">
+            <label for="location_name">Duration</label>
+            <input type="text" class="form-control" id="tk_duration" name="duration" value="5" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" for="form_api_play" class="btn btn-primary btn-send-api-test-key" id="btn_send_api_test_key">Send</button>
+      </div>
+    </div>
+  </div>
+</div>
