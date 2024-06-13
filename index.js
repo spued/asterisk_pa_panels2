@@ -5,14 +5,15 @@ const fs = require("fs");
 const app = express();
 const mongoose = require("mongoose");
 
-const dotenv = require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
+
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 const cron = require("node-cron");
 // Importing file-store module
 
-const path = require("path");
 var winston = require("winston"); // for transports.Console
 var expressWinston = require("express-winston");
 const { loginCheck } = require("./utils/passport");

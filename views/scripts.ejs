@@ -27,9 +27,11 @@
 
 <script type="text/javascript">
   $(function() {
-    var logo = '';
-    logo = '<%= user.logo_url %>';
-    //console.log(logo);
-    if (logo != '-') $('#img_logo').attr('src', '/public/img/' + logo);
+    if (process.env.NODE_ENV != undefined) {
+      var logo = '';
+      logo = '<%= user.logo_url %>';
+      //console.log(logo);
+      if (logo != '-') $('#img_logo').attr('src', '/public/img/' + logo);
+    }
   })
 </script>

@@ -9,21 +9,17 @@ const { spawn } = require("child_process");
 var moment = require("moment");
 
 var main_play_list = [];
-var udp_out_port_state = () => {
-  var port_array = [];
-  for (
-    let port = process.env.UDP_OUT_PORT;
-    port <= process.env.MAX_UDP_OUT_PORT;
-    port++
-  ) {
-    port_array.push({
-      number: port,
-      status: 0,
-    });
-  }
-  return port_array;
-};
-
+var udp_out_port_state = [];
+for (
+  let port = process.env.UDP_OUT_PORT;
+  port <= process.env.MAX_UDP_OUT_PORT;
+  port++
+) {
+  udp_out_port_state.push({
+    number: port,
+    status: 0,
+  });
+}
 const local_player_play = (data, res) => {
   console.log("Controller: schedule player: Play = " + data.location_name);
   var dialogs = {};
@@ -40,7 +36,7 @@ const local_player_play = (data, res) => {
   const _udp_outport_index = udp_out_port_state.findIndex(
     (port) => port.status == 0
   );
-  if (_udp_outport == undefined) {
+  if (_udp_outport_index == undefined) {
     console.log("Can not find UDP port out");
     return 1;
   }

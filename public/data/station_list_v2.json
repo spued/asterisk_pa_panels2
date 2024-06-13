@@ -1,0 +1,447 @@
+[
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/acr_103_25",
+    "name": "acr(FM 103.25 MHz)",
+    "province": "acr(FM 103.25 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/bkn_fm90_50",
+    "name": "Bungkan_FM90.50",
+    "province": "Bungkan_FM90.50"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/brm_am1361",
+    "name": "Burirum_AM1361",
+    "province": "Burirum_AM1361"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cbi_fm99_75",
+    "name": "chonburiFM99.75MHz",
+    "province": "chonburiFM99.75MHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cmi_am1476",
+    "name": "cmi(AM 1476 KHz)",
+    "province": "cmi(AM 1476 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cmi_am639",
+    "name": "cmi(AM 639 KHz)",
+    "province": "cmi(AM 639 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cmi_fm89_25",
+    "name": "Fang-CM FM 89.25",
+    "province": "Fang-CM FM 89.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cmi_fm93_25",
+    "name": "cmi(FM 93.25 MHz)",
+    "province": "cmi(FM 93.25 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cmi_fm98",
+    "name": "cmi(FM 98 MHz)",
+    "province": "cmi(FM 98 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cnt_fm91_75",
+    "name": "Chainat (FM 91.75 MHz)",
+    "province": "Chainat"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cpm_fm92_75",
+    "name": "Chaiyapoom_FM92.75",
+    "province": "Chaiyapoom_FM92.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cpn_fm100",
+    "name": "Chumporn_FM100",
+    "province": "Chumporn_FM100"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cri_fm95_75",
+    "name": "CRI FM 95.75 MHz",
+    "province": "CRI FM 95.75 MHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cti_am1125",
+    "name": "CTI(AM 1125 KHz)",
+    "province": "CTI(AM 1125 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/cti_fm90_25",
+    "name": "cti_fm90_25",
+    "province": "cti_fm90_25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kbi_fm98_5",
+    "name": "Krabi_FM98.5",
+    "province": "Krabi_FM98.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kkn_am621",
+    "name": "Forlearn_Kornk_AM621",
+    "province": "Forlearn_Kornk_AM621"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kkn_fm99_50",
+    "name": "Khonkean FM 99.50 Mhz",
+    "province": "Khonkean"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kpt_fm97_75",
+    "name": "Kampangphet_FM97.75",
+    "province": "Kampangphet_FM97.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kri_am558",
+    "name": "KRI(AM 558 KHz)",
+    "province": "KRI(AM 558 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/kri_fm94_25",
+    "name": "Sangkhlaburi94.25MHz",
+    "province": "Sangkhlaburi94.25MHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ksn_fm93",
+    "name": "Kalasin(FM 93 MHz)",
+    "province": "Kalasin(FM 93 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lei_am1341",
+    "name": "Loei__AM1341 kHz",
+    "province": "Loei__AM1341 kHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lei_fm90_25",
+    "name": "Lei-Dansai_FM90.25",
+    "province": "Lei-Dansai_FM90.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lei_fm95_25",
+    "name": "Loei FM 95.25",
+    "province": "Loei FM 95.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lpg_am549",
+    "name": "Lampang(AM 549 KHz)",
+    "province": "Lampang(AM 549 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lpg_fm97",
+    "name": "Lampang(FM 97 MHz)",
+    "province": "Lampang(FM 97 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/lpn_fm95",
+    "name": "Lumpoon_FM95",
+    "province": "Lumpoon_FM95"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/mdh_am549",
+    "name": "Mukdahan_AM549",
+    "province": "Mukdahan_AM549"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/mdh_fm99_25",
+    "name": "Mukdahan_FM99.25",
+    "province": "Mukdahan_FM99.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/mkm_fm106_5",
+    "name": "Mahasarakam_FM106.5",
+    "province": "Mahasarakam_FM106.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/msn_fm104",
+    "name": "MSN(FM 104 MHz)",
+    "province": "MSN(FM 104 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/msn_fm90_5",
+    "name": "Maesareang_90_5",
+    "province": "Maesareang_90_5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nan_fm94_75",
+    "name": "Nan(FM 94.75 MHz)",
+    "province": "Nan(FM 94.75 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nbp_fm97_25",
+    "name": "Nongbuarumpu_FM97.25",
+    "province": "Nongbuarumpu_FM97.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nki_am810",
+    "name": "Nongkai_AM810",
+    "province": "Nongkai_AM810"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nki_fm90_5",
+    "name": "Nongkai_FM90.5",
+    "province": "Nongkai_FM90.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nma_am729",
+    "name": "Nakornrat_AM729",
+    "province": "Nakornrat_AM729"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nma_fm105_25",
+    "name": "Nakornrat_FM105.25",
+    "province": "Nakornrat_FM105.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/npm_fm90_25",
+    "name": "Nakornpanom_FM90.25",
+    "province": "Nakornpanom_FM90.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nst_fm93_50",
+    "name": "Nakornsi_FM93.50",
+    "province": "Nakornsi_FM93.50"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nst_fm97_00",
+    "name": "Thungsong_FM97",
+    "province": "Thungsong_FM97"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nwt_fm106_5",
+    "name": "Sungigolok_FM106.5",
+    "province": "Sungigolok_FM106.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/nwt_fm98_25",
+    "name": "Naratiwas_FM98.25",
+    "province": "Naratiwas_FM98.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pbi_fm95_75",
+    "name": "Petburi_FM95.75",
+    "province": "Petburi_FM95.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pkn_fm102_25",
+    "name": "Prajuab_FM102.25",
+    "province": "Prajuab_FM102.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pkt_am1062",
+    "name": "Phuket_AM1062",
+    "province": "Phuket_AM1062"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pkt_fm96_75",
+    "name": "Phuket_FM96.75",
+    "province": "Phuket_FM96.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/plg_fm98",
+    "name": "Patalung_FM98",
+    "province": "Patalung_FM98"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/plk_am1026",
+    "name": "Pisanulok_AM1026",
+    "province": "Pisanulok_AM1026"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/plk_fm94_25",
+    "name": "Pisanulok_FM94.25",
+    "province": "Pisanulok_FM94.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pna_fm90_25",
+    "name": "NBT_TakuapaFM90.25",
+    "province": "NBT_TakuapaFM90.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pnb_fm102_75",
+    "name": "Petchaboon_FM102.75",
+    "province": "Petchaboon_FM102.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pre_fm91",
+    "name": "Phrae(FM 91 MHz)",
+    "province": "Phrae(FM 91 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ptn_fm101",
+    "name": "pattani FM 101.00",
+    "province": "pattani FM 101.00"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/pyo_fm95_25",
+    "name": "Payao_FM95.25",
+    "province": "Payao_FM95.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ret_fm94_00",
+    "name": "Roi Et(FM 94.00 MHz)",
+    "province": "Roi Et(FM 94.00 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/rng_am783",
+    "name": "Ranong_AM 783 KHz",
+    "province": "Ranong_AM 783 KHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/rng_fm107_25",
+    "name": "Ranong_FM 107.25 MHz",
+    "province": "Ranong_FM 107.25 MHz"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ryg_fm91_75",
+    "name": "Rayong(FM 91.75 MHz)",
+    "province": "Rayong(FM 91.75 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ska_am558",
+    "name": "Songkhla(AM 558 KHz)",
+    "province": "Songkhla(AM 558 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ska_fm89_50",
+    "name": "Songkra_FM89.5",
+    "province": "Songkra_FM89.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ska_fm90_5",
+    "name": "Songkra_FM90.5",
+    "province": "Songkra_FM90.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/skw_fm103_25",
+    "name": "SKW (FM 103.25 MHz)",
+    "province": "SKW (FM 103.25 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/sni_fm89_75",
+    "name": "Suratani_FM89.75",
+    "province": "Suratani_FM89.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/sni_fm95_50",
+    "name": "Suratani_FM95.50",
+    "province": "Suratani_FM95.50"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/sni_fm96_75",
+    "name": "Samui_FM96.75",
+    "province": "Samui_FM96.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/snk_fm91_25",
+    "name": "Sakonnakorn_FM91.25",
+    "province": "Sakonnakorn_FM91.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/spb_fm102_25",
+    "name": "Supanburi_FM102.25",
+    "province": "Supanburi_FM102.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/srn_fm93_5",
+    "name": "Surin(FM 93.5 MHz)",
+    "province": "Surin(FM 93.5 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/srn_fm97_5",
+    "name": "Surin(FM 97.5 MHz)",
+    "province": "Surin(FM 97.5 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ssk_fm100_25",
+    "name": "SiSaKetFM100.25MHz)",
+    "province": "SiSaKetFM100.25MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/sti_fm93_75",
+    "name": "Sukothai_FM93.75",
+    "province": "Sukothai_FM93.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/stn_fm95_5",
+    "name": "Stoon_FM95.5",
+    "province": "Stoon_FM95.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/tak_am864",
+    "name": "Tak_AM864",
+    "province": "Tak_AM864"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/tak_fm102",
+    "name": "Tak_FM102",
+    "province": "Tak_FM102"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/tak_fm103_75",
+    "name": "Maesod_FM103.75",
+    "province": "Maesod_FM103.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/trg_am810",
+    "name": "Trang_AM810",
+    "province": "Trang_AM810"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/trg_fm91_25",
+    "name": "Trang_FM91.25",
+    "province": "Trang_FM91.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ubn_98_5",
+    "name": "Ubon_FM98.5",
+    "province": "Ubon_FM98.5"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/ubn_am1341",
+    "name": "Ubon_AM1341",
+    "province": "Ubon_AM1341"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/udn_93_75",
+    "name": "Udontani_FM93.75",
+    "province": "Udontani_FM93.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/utt_96_75",
+    "name": "Uttaradit_FM96.75",
+    "province": "Uttaradit_FM96.75"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yla_am981",
+    "name": "Yala(AM 981 KHz)",
+    "province": "Yala(AM 981 KHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yla_fm92",
+    "name": "Yala_FM92",
+    "province": "Yala_FM92"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yla_fm93",
+    "name": "Betong-Yala(FM 93 MH",
+    "province": "Betong-Yala(FM 93 MH"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yla_fm94_25",
+    "name": "Yala_FM94.25",
+    "province": "Yala_FM94.25"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yla_fm95",
+    "name": "Yala(FM 95 MHz)",
+    "province": "Yala(FM 95 MHz)"
+  },
+  {
+    "ng_url": "https://radio-org-01-ott.prd.go.th/yst_fm90",
+    "name": "Yasothon(FM 90 MHz)",
+    "province": "Yasothon(FM 90 MHz)"
+  }
+]
